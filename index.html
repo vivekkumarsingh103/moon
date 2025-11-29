@@ -480,6 +480,24 @@
             opacity: 0.9;
         }
 
+        /* Empty State Styles */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             header {
@@ -561,20 +579,9 @@
         <section id="home">
             <h2 class="section-title">Latest Posts</h2>
             <div class="posts-grid">
-                <div class="glass-card post-card">
-                    <img src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Winter Drama" class="post-image">
-                    <h3 class="post-title">Frozen Hearts: A Winter Tale</h3>
-                    <p class="post-excerpt">Explore the chilling story of love and betrayal in the coldest winter of the century...</p>
-                </div>
-                <div class="glass-card post-card">
-                    <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Snowy Drama" class="post-image">
-                    <h3 class="post-title">Snowfall Secrets</h3>
-                    <p class="post-excerpt">What lies beneath the pristine snow? Uncover the mysteries of a small mountain town...</p>
-                </div>
-                <div class="glass-card post-card">
-                    <img src="https://images.unsplash.com/photo-1542202229-7d93c33f5d4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Icy Drama" class="post-image">
-                    <h3 class="post-title">The Ice Queen's Reign</h3>
-                    <p class="post-excerpt">A powerful ruler with a frozen heart faces her greatest challenge when warmth enters her kingdom...</p>
+                <div class="empty-state">
+                    <i class="fas fa-newspaper"></i>
+                    <p>No posts yet. Check back soon for updates!</p>
                 </div>
             </div>
         </section>
@@ -583,50 +590,14 @@
         <section id="ongoing">
             <h2 class="section-title">Ongoing Dramas</h2>
             <div class="dramas-grid">
-                <div class="glass-card drama-card">
-                    <div class="drama-icon">
-                        <i class="fas fa-snowflake"></i>
-                    </div>
-                    <h3 class="drama-title">Winter's Edge</h3>
-                    <p class="drama-info">Ep 12/24 • Fantasy</p>
-                    <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
-                </div>
-                <div class="glass-card drama-card">
-                    <div class="drama-icon">
-                        <i class="fas fa-mountain"></i>
-                    </div>
-                    <h3 class="drama-title">Frostbound</h3>
-                    <p class="drama-info">Ep 8/16 • Mystery</p>
-                    <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
-                </div>
-                <div class="glass-card drama-card">
-                    <div class="drama-icon">
-                        <i class="fas fa-wind"></i>
-                    </div>
-                    <h3 class="drama-title">Northern Lights</h3>
-                    <p class="drama-info">Ep 15/20 • Romance</p>
-                    <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
-                </div>
-                <div class="glass-card drama-card">
-                    <div class="drama-icon">
-                        <i class="fas fa-icicles"></i>
-                    </div>
-                    <h3 class="drama-title">Glacial Heart</h3>
-                    <p class="drama-info">Ep 5/12 • Drama</p>
-                    <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
+                <div class="empty-state">
+                    <i class="fas fa-film"></i>
+                    <p>No ongoing dramas at the moment.</p>
                 </div>
             </div>
         </section>
 
-        <!-- All Posts Section (Moved before Blog) -->
+        <!-- All Posts Section -->
         <section id="bot-posts">
             <h2 class="section-title">All Posts</h2>
             <div class="bot-posts-container">
@@ -635,7 +606,10 @@
                     <button class="bot-btn" id="clearPostsBtn">Clear All Posts</button>
                 </div>
                 <div class="bot-posts-grid" id="botPostsGrid">
-                    <!-- Bot posts will be added here dynamically -->
+                    <div class="empty-state">
+                        <i class="fas fa-feather"></i>
+                        <p>No posts available. Add your first post!</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -644,21 +618,9 @@
         <section id="blog">
             <h2 class="section-title">Latest Blog Posts</h2>
             <div class="blog-container">
-                <div class="blog-post">
-                    <h3 class="blog-title">The Art of Winter Cinematography</h3>
-                    <div class="blog-meta">December 10, 2023 • 5 min read</div>
-                    <div class="blog-content">
-                        <p>Creating compelling winter scenes requires a delicate balance between capturing the beauty of the season and conveying the emotional depth of the story. The cold, stark landscapes can serve as powerful metaphors for isolation, purity, or emotional distance.</p>
-                        <p>In this post, we explore how directors use winter settings to enhance their narratives and create memorable cinematic moments that resonate with audiences long after the credits roll.</p>
-                    </div>
-                </div>
-                <div class="blog-post">
-                    <h3 class="blog-title">Behind the Scenes: Creating Winter Magic</h3>
-                    <div class="blog-meta">December 5, 2023 • 7 min read</div>
-                    <div class="blog-content">
-                        <p>From artificial snow to temperature-controlled sets, creating convincing winter environments is both an art and a science. Our production team shares their secrets for bringing winter to life, even when filming in the middle of summer.</p>
-                        <p>Discover the techniques and technologies that help create the immersive winter worlds that captivate viewers and transport them to frosty realms of drama and intrigue.</p>
-                    </div>
+                <div class="empty-state">
+                    <i class="fas fa-blog"></i>
+                    <p>No blog posts published yet.</p>
                 </div>
             </div>
         </section>
@@ -703,18 +665,8 @@
         const searchInput = document.querySelector('.search-input');
         const searchResults = document.getElementById('searchResults');
         
-        // Sample data for search
-        const searchData = [
-            { title: "Frozen Hearts", type: "Drama", category: "ongoing" },
-            { title: "Snowfall Secrets", type: "Mystery", category: "ongoing" },
-            { title: "The Ice Queen's Reign", type: "Fantasy", category: "blog" },
-            { title: "Winter's Edge", type: "Fantasy", category: "ongoing" },
-            { title: "Frostbound", type: "Mystery", category: "ongoing" },
-            { title: "Northern Lights", type: "Romance", category: "ongoing" },
-            { title: "Glacial Heart", type: "Drama", category: "ongoing" },
-            { title: "Winter Cinematography", type: "Article", category: "blog" },
-            { title: "Creating Winter Magic", type: "Article", category: "blog" }
-        ];
+        // Empty search data
+        const searchData = [];
 
         // Toggle search input
         searchBtn.addEventListener('click', () => {
@@ -759,12 +711,6 @@
                         <div class="search-result-type">${result.type} • ${result.category}</div>
                     `;
                     resultItem.addEventListener('click', () => {
-                        // Navigate to the appropriate section
-                        if (result.category === 'ongoing') {
-                            window.location.href = '#ongoing';
-                        } else if (result.category === 'blog') {
-                            window.location.href = '#blog';
-                        }
                         searchInput.value = '';
                         searchInput.classList.remove('active');
                         searchResults.classList.remove('active');
@@ -805,6 +751,12 @@
 
         // Function to add a bot post
         function addBotPost(post) {
+            // Remove empty state if it exists
+            const emptyState = botPostsGrid.querySelector('.empty-state');
+            if (emptyState) {
+                emptyState.remove();
+            }
+            
             const postCard = document.createElement('div');
             postCard.classList.add('glass-card', 'bot-post-card');
             
@@ -862,6 +814,14 @@
         clearPostsBtn.addEventListener('click', () => {
             if (confirm("Are you sure you want to clear all posts?")) {
                 botPostsGrid.innerHTML = '';
+                // Add empty state back
+                const emptyState = document.createElement('div');
+                emptyState.classList.add('empty-state');
+                emptyState.innerHTML = `
+                    <i class="fas fa-feather"></i>
+                    <p>No posts available. Add your first post!</p>
+                `;
+                botPostsGrid.appendChild(emptyState);
             }
         });
     </script>
