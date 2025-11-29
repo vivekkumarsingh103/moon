@@ -309,6 +309,66 @@
             line-height: 1.8;
         }
 
+        /* Bot Posts Section */
+        .bot-posts-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .bot-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .bot-btn {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-color);
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cinzel', serif;
+            font-variant: small-caps;
+            letter-spacing: 1px;
+        }
+
+        .bot-btn:hover {
+            background: rgba(168, 208, 230, 0.1);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .bot-posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .bot-post-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bot-post-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .bot-post-tag {
+            background: rgba(247, 108, 108, 0.2);
+            color: var(--accent-color);
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.6rem;
+        }
+
         /* Search Results */
         .search-results {
             position: absolute;
@@ -433,12 +493,17 @@
                 font-size: 2rem;
             }
 
-            .posts-grid, .dramas-grid {
+            .posts-grid, .dramas-grid, .bot-posts-grid {
                 grid-template-columns: 1fr;
             }
 
             .search-input.active {
                 width: 150px;
+            }
+
+            .bot-controls {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -464,6 +529,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#ongoing">Ongoing</a></li>
                 <li><a href="#blog">Blog</a></li>
+                <li><a href="#bot-posts">All Posts</a></li>
             </ul>
         </nav>
         <div class="search-container">
@@ -569,6 +635,24 @@
                         <p>From artificial snow to temperature-controlled sets, creating convincing winter environments is both an art and a science. Our production team shares their secrets for bringing winter to life, even when filming in the middle of summer.</p>
                         <p>Discover the techniques and technologies that help create the immersive winter worlds that captivate viewers and transport them to frosty realms of drama and intrigue.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bot Posts Section -->
+        <section id="bot-posts">
+            <h2 class="section-title">All Posts</h2>
+            <div class="bot-posts-container">
+                <div class="bot-controls">
+                    <button class="bot-btn" id="addPostBtn">
+                        <i class="fas fa-plus"></i> Add New Post
+                    </button>
+                    <button class="bot-btn" id="clearPostsBtn">
+                        <i class="fas fa-trash"></i> Clear All Posts
+                    </button>
+                </div>
+                <div class="bot-posts-grid" id="botPostsGrid">
+                    <!-- Bot posts will be added here dynamically -->
                 </div>
             </div>
         </section>
@@ -706,6 +790,101 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        // Bot Posts Functionality
+        const addPostBtn = document.getElementById('addPostBtn');
+        const clearPostsBtn = document.getElementById('clearPostsBtn');
+        const botPostsGrid = document.getElementById('botPostsGrid');
+
+        // Sample bot posts data
+        const botPosts = [
+            {
+                title: "Winter's First Snow",
+                excerpt: "The first snowfall of the season always brings a special magic to our dramas.",
+                image: "https://images.unsplash.com/photo-1483664852095-d6cc6870702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                tag: "Update",
+                timestamp: "2 hours ago"
+            },
+            {
+                title: "Behind the Frost: Episode 5",
+                excerpt: "A deep dive into the symbolism of ice crystals in our latest episode.",
+                image: "https://images.unsplash.com/photo-1517299321609-52687d1bc55a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                tag: "Analysis",
+                timestamp: "5 hours ago"
+            },
+            {
+                title: "Character Spotlight: Elara",
+                excerpt: "Exploring the motivations and backstory of our frost mage protagonist.",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                tag: "Character",
+                timestamp: "1 day ago"
+            }
+        ];
+
+        // Function to add a bot post
+        function addBotPost(post) {
+            const postCard = document.createElement('div');
+            postCard.classList.add('glass-card', 'bot-post-card');
+            
+            postCard.innerHTML = `
+                <div class="bot-post-meta">
+                    <span class="bot-post-tag">${post.tag}</span>
+                    <span>${post.timestamp}</span>
+                </div>
+                <img src="${post.image}" alt="${post.title}" class="post-image">
+                <h3 class="post-title">${post.title}</h3>
+                <p class="post-excerpt">${post.excerpt}</p>
+            `;
+            
+            botPostsGrid.appendChild(postCard);
+        }
+
+        // Add initial bot posts
+        botPosts.forEach(post => addBotPost(post));
+
+        // Add new post button functionality
+        addPostBtn.addEventListener('click', () => {
+            const newPosts = [
+                {
+                    title: "Winter Wardrobe Secrets",
+                    excerpt: "How our costume designers create authentic winter clothing for our characters.",
+                    image: "https://images.unsplash.com/photo-1542856391-010b89d4baf4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    tag: "Behind Scenes",
+                    timestamp: "Just now"
+                },
+                {
+                    title: "Frozen Lake Filming",
+                    excerpt: "The challenges and triumphs of filming on location at a frozen lake.",
+                    image: "https://images.unsplash.com/photo-1579033462043-0f11a7862f7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    tag: "Production",
+                    timestamp: "Just now"
+                },
+                {
+                    title: "Winter Sound Design",
+                    excerpt: "How we create the perfect winter soundscape for our dramas.",
+                    image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+                    tag: "Audio",
+                    timestamp: "Just now"
+                }
+            ];
+            
+            // Add a random new post
+            const randomPost = newPosts[Math.floor(Math.random() * newPosts.length)];
+            addBotPost(randomPost);
+            
+            // Scroll to the new post
+            window.scrollTo({
+                top: document.getElementById('bot-posts').offsetTop - 80,
+                behavior: 'smooth'
+            });
+        });
+
+        // Clear all posts button functionality
+        clearPostsBtn.addEventListener('click', () => {
+            if (confirm("Are you sure you want to clear all posts?")) {
+                botPostsGrid.innerHTML = '';
+            }
         });
     </script>
 </body>
