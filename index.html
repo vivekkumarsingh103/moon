@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dramawallah | Winter Anime Aesthetic</title>
+    <title>Dramawallah | Winter Forest Fantasy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,148 +14,106 @@
         }
 
         :root {
-            --dark-bg: #0a0e17;
-            --midnight-blue: #101826;
-            --winter-blue: #a8d8ea;
-            --silver-accent: #e0f7fa;
-            --white-highlight: #f0f8ff;
-            --glow-blue: #4fc3f7;
-            --frost-border: rgba(255, 255, 255, 0.1);
+            --deep-charcoal: #0d1219;
+            --forest-dark: #15202b;
+            --pine-green: #1a3d2f;
+            --teal: #2a9d8f;
+            --winter-blue: #8ecae6;
+            --icy-blue: #a8dadc;
+            --magic-purple: #9d4edd;
+            --magic-blue: #4cc9f0;
+            --glow-color: rgba(157, 78, 221, 0.3);
         }
 
         body {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--midnight-blue) 100%);
-            color: var(--white-highlight);
-            min-height: 100vh;
+            background-color: var(--deep-charcoal);
+            color: #e0e0e0;
             overflow-x: hidden;
-            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(42, 157, 143, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(157, 78, 221, 0.05) 0%, transparent 20%);
+            min-height: 100vh;
         }
 
-        /* Snow Animation */
-        .snow-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 100;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .snow {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-            filter: blur(1px);
-            opacity: 0.8;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
-
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 5%;
-            background: rgba(10, 14, 23, 0.8);
+        /* Header Styles */
+        header {
+            background-color: rgba(13, 18, 25, 0.8);
             backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
-            z-index: 10;
-            border-bottom: 1px solid var(--frost-border);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(42, 157, 143, 0.2);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 300;
-            background: linear-gradient(to right, var(--white-highlight), var(--winter-blue));
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--teal), var(--magic-blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 24px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
         }
 
         .nav-links a {
-            color: var(--white-highlight);
+            color: var(--icy-blue);
             text-decoration: none;
-            font-weight: 300;
-            font-size: 1.1rem;
-            padding: 0.5rem 0;
-            position: relative;
+            font-weight: 500;
             transition: all 0.3s ease;
-        }
-
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--glow-blue);
-            transition: width 0.3s ease;
-            box-shadow: 0 0 10px var(--glow-blue);
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: var(--winter-blue);
+            color: var(--magic-blue);
         }
 
-        .nav-links a:hover:after {
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, var(--teal), var(--magic-purple));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
             width: 100%;
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            background: rgba(16, 24, 38, 0.7);
-            border-radius: 30px;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--frost-border);
-            transition: all 0.3s ease;
-        }
-
-        .search-bar:focus-within {
-            box-shadow: 0 0 15px var(--glow-blue);
-            border-color: var(--glow-blue);
-        }
-
-        .search-bar input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--white-highlight);
-            width: 200px;
-            padding: 0.3rem;
-        }
-
-        .search-bar i {
-            color: var(--winter-blue);
-            margin-right: 0.5rem;
         }
 
         /* Hero Section */
         .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 160px 0 100px;
             text-align: center;
-            padding: 0 5%;
             position: relative;
             overflow: hidden;
         }
@@ -167,434 +125,414 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path d="M0,0 L1200,0 L1200,800 L0,800 Z" fill="none"/><path d="M0,400 Q300,250 600,400 T1200,400 L1200,800 L0,800 Z" fill="%23101826" opacity="0.7"/></svg>') no-repeat center bottom;
-            background-size: cover;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(76, 201, 240, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
             z-index: -1;
         }
 
         .hero h1 {
-            font-size: 4.5rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, var(--white-highlight), var(--winter-blue));
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--winter-blue), var(--magic-purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(168, 216, 234, 0.3);
-            opacity: 0;
-            animation: fadeInUp 1.5s ease 0.5s forwards;
+            text-shadow: 0 0 20px rgba(76, 201, 240, 0.3);
         }
 
         .hero p {
-            font-size: 1.5rem;
-            font-weight: 300;
+            font-size: 1.2rem;
             max-width: 700px;
-            margin-bottom: 2rem;
-            color: var(--silver-accent);
-            opacity: 0;
-            animation: fadeInUp 1.5s ease 1s forwards;
+            margin: 0 auto 40px;
+            color: var(--icy-blue);
+            line-height: 1.6;
         }
 
-        .cta-button {
-            padding: 0.8rem 2rem;
-            background: transparent;
-            border: 1px solid var(--winter-blue);
-            color: var(--winter-blue);
-            font-size: 1.1rem;
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 12px 30px;
             border-radius: 30px;
-            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            z-index: 1;
-            opacity: 0;
-            animation: fadeInUp 1.5s ease 1.5s forwards;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .cta-button:before {
+        .btn-primary {
+            background: linear-gradient(135deg, var(--teal), var(--magic-blue));
+            color: var(--deep-charcoal);
+            box-shadow: 0 4px 15px rgba(42, 157, 143, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(42, 157, 143, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--winter-blue);
+            border: 2px solid var(--teal);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(42, 157, 143, 0.1);
+            box-shadow: 0 0 15px rgba(42, 157, 143, 0.4);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        /* Cards Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--winter-blue);
+            position: relative;
+        }
+
+        .section-title::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.4), transparent);
-            transition: all 0.6s ease;
-            z-index: -1;
-        }
-
-        .cta-button:hover {
-            box-shadow: 0 0 20px var(--glow-blue);
-            color: var(--white-highlight);
-        }
-
-        .cta-button:hover:before {
-            left: 100%;
-        }
-
-        /* Content Section */
-        .content {
-            padding: 5rem 5%;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
-            display: inline-block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal), var(--magic-purple));
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--glow-blue), transparent);
+            border-radius: 3px;
         }
 
         .cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
         }
 
         .card {
-            background: rgba(16, 24, 38, 0.6);
+            background: rgba(21, 32, 43, 0.7);
             border-radius: 15px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--frost-border);
+            padding: 25px;
             transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
-            position: relative;
-        }
-
-        .card:nth-child(1) { animation-delay: 0.2s; }
-        .card:nth-child(2) { animation-delay: 0.4s; }
-        .card:nth-child(3) { animation-delay: 0.6s; }
-        .card:nth-child(4) { animation-delay: 0.8s; }
-        .card:nth-child(5) { animation-delay: 1s; }
-        .card:nth-child(6) { animation-delay: 1.2s; }
-
-        .card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 10px 30px rgba(79, 195, 247, 0.2);
-            border-color: var(--glow-blue);
-        }
-
-        .card-img {
-            height: 200px;
-            width: 100%;
-            background: linear-gradient(135deg, var(--midnight-blue) 0%, #1a2a3a 100%);
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(42, 157, 143, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .card-img:before {
+        .card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(79, 195, 247, 0.1) 50%, transparent 70%);
+            background: linear-gradient(135deg, rgba(42, 157, 143, 0.1), rgba(157, 78, 221, 0.1));
             opacity: 0;
-            transition: all 0.5s ease;
+            transition: opacity 0.4s ease;
+            z-index: -1;
         }
 
-        .card:hover .card-img:before {
-            opacity: 1;
-            transform: translateX(100%);
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(76, 201, 240, 0.4);
         }
 
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-            color: var(--silver-accent);
-        }
-
-        .card p {
-            color: var(--winter-blue);
-            font-weight: 300;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            padding: 0.3rem 0.8rem;
-            background: rgba(79, 195, 247, 0.2);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--winter-blue);
-            border: 1px solid rgba(79, 195, 247, 0.3);
-        }
-
-        /* Snow Sparkle Effect */
-        .snow-sparkle {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .card:hover .snow-sparkle {
+        .card:hover::before {
             opacity: 1;
         }
 
-        .sparkle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-            filter: blur(1px);
-            animation: sparkle 1.5s linear infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(10, 14, 23, 0.9);
-            padding: 3rem 5%;
-            text-align: center;
-            border-top: 1px solid var(--frost-border);
-            margin-top: 5rem;
-        }
-
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 300;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, var(--white-highlight), var(--winter-blue));
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--teal), var(--magic-blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--winter-blue);
+        }
+
+        .card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 80%, rgba(157, 78, 221, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 20%, rgba(76, 201, 240, 0.05) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--forest-dark);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(42, 157, 143, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--winter-blue);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
         .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
         }
 
         .footer-links a {
-            color: var(--silver-accent);
+            color: #b0b0b0;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: var(--winter-blue);
+            color: var(--magic-blue);
         }
 
-        .social-icons {
+        .social-links {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .social-icons a {
-            color: var(--silver-accent);
-            font-size: 1.5rem;
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(42, 157, 143, 0.1);
+            color: var(--teal);
             transition: all 0.3s ease;
         }
 
-        .social-icons a:hover {
-            color: var(--winter-blue);
-            transform: translateY(-5px);
+        .social-links a:hover {
+            background: var(--teal);
+            color: var(--deep-charcoal);
+            transform: translateY(-3px);
         }
 
         .copyright {
-            color: var(--winter-blue);
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
             font-size: 0.9rem;
-            opacity: 0.7;
         }
 
         /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
+        @keyframes float {
+            0%, 100% {
                 transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
             }
         }
 
-        /* Responsive Design */
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        /* Fireflies / Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--magic-blue);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: particle-float 15s infinite linear;
+        }
+
+        .particle:nth-child(2n) {
+            background: var(--magic-purple);
+            animation-duration: 20s;
+        }
+
+        .particle:nth-child(3n) {
+            background: var(--teal);
+            animation-duration: 25s;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+            }
+            100% {
+                transform: translateY(-100px) translateX(20px);
+            }
+        }
+
+        /* Leaf Animation */
+        .leaf {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .leaf::before {
+            content: '❄';
+            color: var(--winter-blue);
+            font-size: 20px;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
             .nav-links {
-                display: none;
+                margin-top: 20px;
             }
-
+            
+            .nav-links li {
+                margin: 0 15px;
+            }
+            
             .hero h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
-
-            .hero p {
-                font-size: 1.2rem;
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
             }
-
-            .cards-container {
-                grid-template-columns: 1fr;
+            
+            .btn {
+                width: 200px;
+                margin-bottom: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Snow Animation -->
-    <div class="snow-container" id="snow-container"></div>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">Dramawallah</div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Series</a>
-            <a href="#">Movies</a>
-            <a href="#">Genres</a>
-            <a href="#">New Releases</a>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-tree"></i>
+                    Dramawallah
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Stories</a></li>
+                    <li><a href="#">Characters</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="search-bar">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search...">
-        </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Winter Anime Collection</h1>
-        <p>Discover magical stories set in serene winter landscapes. Experience the beauty of snow-kissed adventures.</p>
-        <button class="cta-button">Explore Now</button>
+        <div class="container">
+            <h1 class="floating">Winter Forest Fantasies</h1>
+            <p>Step into a world where winter forests come alive with magical creatures, ancient spirits, and enchanting tales. Explore the beauty of nature through an anime-inspired lens.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-play"></i> Begin Journey
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <i class="fas fa-book-open"></i> Explore Stories
+                </a>
+            </div>
+        </div>
     </section>
 
-    <!-- Content Section -->
-    <section class="content">
-        <h2 class="section-title">Featured Series</h2>
-        <div class="cards-container">
-            <!-- Card 1 -->
-            <div class="card">
-                <div class="snow-sparkle" id="sparkle-1"></div>
-                <div class="card-img"></div>
-                <div class="card-content">
-                    <h3>Snowfall Chronicles</h3>
-                    <p>A tale of friendship and magic in a winter wonderland where snow spirits guide the way.</p>
-                    <div class="card-tags">
-                        <span class="tag">Fantasy</span>
-                        <span class="tag">Adventure</span>
-                        <span class="tag">Slice of Life</span>
+    <!-- Cards Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Enchanting Features</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-moon"></i>
                     </div>
+                    <h3>Moonlit Forests</h3>
+                    <p>Discover serene landscapes bathed in the gentle glow of moonlight, where shadows dance and magic awakens.</p>
                 </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="card">
-                <div class="snow-sparkle" id="sparkle-2"></div>
-                <div class="card-img"></div>
-                <div class="card-content">
-                    <h3>Frozen Memories</h3>
-                    <p>In a world where memories crystallize as ice, a young girl embarks on a journey to recover her past.</p>
-                    <div class="card-tags">
-                        <span class="tag">Drama</span>
-                        <span class="tag">Mystery</span>
-                        <span class="tag">Supernatural</span>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-snowflake"></i>
                     </div>
+                    <h3>Winter Whispers</h3>
+                    <p>Listen to the soft whispers of winter winds as they carry tales of ancient spirits and forgotten lore.</p>
                 </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="card">
-                <div class="snow-sparkle" id="sparkle-3"></div>
-                <div class="card-img"></div>
-                <div class="card-content">
-                    <h3>Winter's Embrace</h3>
-                    <p>Two souls find warmth in each other during the coldest winter the kingdom has ever known.</p>
-                    <div class="card-tags">
-                        <span class="tag">Romance</span>
-                        <span class="tag">Fantasy</span>
-                        <span class="tag">Historical</span>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-sparkles"></i>
                     </div>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="card">
-                <div class="snow-sparkle" id="sparkle-4"></div>
-                <div class="card-img"></div>
-                <div class="card-content">
-                    <h3>Northern Lights</h3>
-                    <p>A celestial phenomenon grants extraordinary powers to those born under its glow.</p>
-                    <div class="card-tags">
-                        <span class="tag">Action</span>
-                        <span class="tag">Sci-Fi</span>
-                        <span class="tag">Superpower</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="card">
-                <div class="snow-sparkle" id="sparkle-5"></div>
-                <div class="card-img"></div>
-                <div class="card-content">
-                    <h3>Icebound Kingdom</h3>
-                    <p>A princess must break an ancient curse that has frozen her kingdom in eternal winter.</p>
-                    <div class="card-tags">
-                        <span class="tag">Adventure</span>
-                        <span class="tag">Fantasy</span>
-                        <span class="tag">Action</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="card">
-                <div class="snow-sparkle" id="sparkle-6"></div>
-                <div class="card-img"></div>
-                <div class="card-content">
-                    <h3>Snowfall Serenade</h3>
-                    <p>A musician discovers that her melodies can control the weather in her snowy mountain village.</p>
-                    <div class="card-tags">
-                        <span class="tag">Music</span>
-                        <span class="tag">Slice of Life</span>
-                        <span class="tag">Supernatural</span>
-                    </div>
+                    <h3>Magical Creatures</h3>
+                    <p>Encounter mystical beings that inhabit these enchanted woods, each with their own unique stories.</p>
                 </div>
             </div>
         </div>
@@ -602,82 +540,125 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo">Dramawallah</div>
-            <div class="footer-links">
-                <a href="#">Home</a>
-                <a href="#">Series</a>
-                <a href="#">Movies</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Dramawallah</h3>
+                    <p>Immerse yourself in the beauty of winter forests and anime-inspired fantasy worlds.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Winter Tales</a></li>
+                        <li><a href="#">Character Gallery</a></li>
+                        <li><a href="#">Forest Lore</a></li>
+                        <li><a href="#">Seasonal Events</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-discord"></i></a>
+            <div class="copyright">
+                <p>&copy; 2023 Dramawallah. All rights reserved. | Crafted with magic and winter spirit</p>
             </div>
-            <p class="copyright">© 2023 Dramawallah. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Create snowflakes
-        function createSnow() {
-            const snowContainer = document.getElementById('snow-container');
-            const snowCount = 100;
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
             
-            for (let i = 0; i < snowCount; i++) {
-                const snow = document.createElement('div');
-                snow.classList.add('snow');
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
                 
-                // Random properties for each snowflake
-                const size = Math.random() * 5 + 3;
-                const posX = Math.random() * 100;
-                const delay = Math.random() * 10;
-                const duration = Math.random() * 10 + 10;
-                const opacity = Math.random() * 0.7 + 0.3;
+                // Random position
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
                 
-                snow.style.width = `${size}px`;
-                snow.style.height = `${size}px`;
-                snow.style.left = `${posX}vw`;
-                snow.style.animationDelay = `${delay}s`;
-                snow.style.animationDuration = `${duration}s`;
-                snow.style.opacity = opacity;
+                particle.style.left = `${left}%`;
+                particle.style.top = `${top}%`;
                 
-                snowContainer.appendChild(snow);
+                // Random size
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random animation delay
+                const delay = Math.random() * 15;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
             }
         }
-
-        // Create snow sparkles for cards
-        function createSparkles() {
-            for (let i = 1; i <= 6; i++) {
-                const sparkleContainer = document.getElementById(`sparkle-${i}`);
-                const sparkleCount = 15;
-                
-                for (let j = 0; j < sparkleCount; j++) {
-                    const sparkle = document.createElement('div');
-                    sparkle.classList.add('sparkle');
+        
+        // Create falling leaves on card hover
+        function createLeaves() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const leafCount = 5;
                     
-                    const posX = Math.random() * 100;
-                    const posY = Math.random() * 100;
-                    const delay = Math.random() * 2;
-                    const duration = Math.random() * 1 + 1;
-                    
-                    sparkle.style.left = `${posX}%`;
-                    sparkle.style.top = `${posY}%`;
-                    sparkle.style.animationDelay = `${delay}s`;
-                    sparkle.style.animationDuration = `${duration}s`;
-                    
-                    sparkleContainer.appendChild(sparkle);
-                }
-            }
+                    for (let i = 0; i < leafCount; i++) {
+                        const leaf = document.createElement('div');
+                        leaf.classList.add('leaf');
+                        
+                        // Random position around the card
+                        const left = Math.random() * 100;
+                        leaf.style.left = `${left}%`;
+                        leaf.style.top = '-20px';
+                        
+                        // Random animation
+                        const animationDuration = Math.random() * 2 + 1;
+                        leaf.style.animation = `fall ${animationDuration}s linear forwards`;
+                        
+                        card.appendChild(leaf);
+                        
+                        // Remove leaf after animation
+                        setTimeout(() => {
+                            leaf.remove();
+                        }, animationDuration * 1000);
+                    }
+                });
+            });
         }
-
+        
         // Initialize animations
-        document.addEventListener('DOMContentLoaded', () => {
-            createSnow();
-            createSparkles();
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            createLeaves();
+            
+            // Add keyframe for falling leaves
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    0% {
+                        transform: translateY(0) rotate(0deg);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translateY(300px) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
 </body>
