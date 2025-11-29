@@ -112,22 +112,48 @@
             text-shadow: 0 0 10px var(--glow-color);
         }
 
-        .sound-toggle {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-color);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
+        .search-container {
             display: flex;
             align-items: center;
-            justify-content: center;
+        }
+
+        .search-box {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--glass-border);
             transition: all 0.3s ease;
         }
 
-        .sound-toggle:hover {
-            background: var(--glass-bg);
+        .search-box:focus-within {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .search-input {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            outline: none;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .search-input.active {
+            width: 200px;
+            margin-right: 0.5rem;
+        }
+
+        .search-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
             color: var(--primary-color);
         }
 
@@ -283,6 +309,52 @@
             line-height: 1.8;
         }
 
+        /* Search Results */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 300px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .search-result-title {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .search-result-type {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+        }
+
         /* Snow Animation */
         .snow-container {
             position: fixed;
@@ -364,6 +436,10 @@
             .posts-grid, .dramas-grid {
                 grid-template-columns: 1fr;
             }
+
+            .search-input.active {
+                width: 150px;
+            }
         }
     </style>
 </head>
@@ -372,7 +448,7 @@
     <div class="video-background">
         <video autoplay muted loop id="bgVideo">
             <!-- In a real implementation, you would use background.mp4 here -->
-            <source src="https://raw.githubusercontent.com/vivekkumarsingh103/moon/main/background.mp4?raw=1">
+            <source src="https://assets.codepen.io/3364143/snow-video.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
     </div>
@@ -390,16 +466,24 @@
                 <li><a href="#blog">Blog</a></li>
             </ul>
         </nav>
-        <button class="sound-toggle" id="soundToggle">
-            <i class="fas fa-volume-mute"></i>
-        </button>
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search dramas...">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="search-results" id="searchResults">
+                <!-- Search results will be populated by JavaScript -->
+            </div>
+        </div>
     </header>
 
     <!-- Main Content -->
     <main>
         <!-- Home Section -->
         <section id="home">
-            <h2 class="section-title">Recent Posts</h2>
+            <h2 class="section-title">Latest Posts</h2>
             <div class="posts-grid">
                 <div class="glass-card post-card">
                     <img src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Winter Drama" class="post-image">
@@ -524,19 +608,88 @@
         // Create snowflakes at intervals
         setInterval(createSnowflake, 100);
 
-        // Sound Toggle
-        const soundToggle = document.getElementById('soundToggle');
-        const bgVideo = document.getElementById('bgVideo');
-        let isMuted = true;
+        // Search Functionality
+        const searchBtn = document.getElementById('searchBtn');
+        const searchInput = document.querySelector('.search-input');
+        const searchResults = document.getElementById('searchResults');
+        
+        // Sample data for search
+        const searchData = [
+            { title: "Frozen Hearts", type: "Drama", category: "ongoing" },
+            { title: "Snowfall Secrets", type: "Mystery", category: "ongoing" },
+            { title: "The Ice Queen's Reign", type: "Fantasy", category: "blog" },
+            { title: "Winter's Edge", type: "Fantasy", category: "ongoing" },
+            { title: "Frostbound", type: "Mystery", category: "ongoing" },
+            { title: "Northern Lights", type: "Romance", category: "ongoing" },
+            { title: "Glacial Heart", type: "Drama", category: "ongoing" },
+            { title: "Winter Cinematography", type: "Article", category: "blog" },
+            { title: "Creating Winter Magic", type: "Article", category: "blog" }
+        ];
 
-        soundToggle.addEventListener('click', () => {
-            isMuted = !isMuted;
-            bgVideo.muted = isMuted;
-            
-            if (isMuted) {
-                soundToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        // Toggle search input
+        searchBtn.addEventListener('click', () => {
+            searchInput.classList.toggle('active');
+            if (searchInput.classList.contains('active')) {
+                searchInput.focus();
             } else {
-                soundToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+                searchResults.classList.remove('active');
+            }
+        });
+
+        // Handle search input
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            
+            if (query.length === 0) {
+                searchResults.classList.remove('active');
+                return;
+            }
+            
+            // Filter results
+            const filteredResults = searchData.filter(item => 
+                item.title.toLowerCase().includes(query)
+            );
+            
+            // Display results
+            displaySearchResults(filteredResults);
+        });
+
+        // Display search results
+        function displaySearchResults(results) {
+            searchResults.innerHTML = '';
+            
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+            } else {
+                results.forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.classList.add('search-result-item');
+                    resultItem.innerHTML = `
+                        <div class="search-result-title">${result.title}</div>
+                        <div class="search-result-type">${result.type} • ${result.category}</div>
+                    `;
+                    resultItem.addEventListener('click', () => {
+                        // Navigate to the appropriate section
+                        if (result.category === 'ongoing') {
+                            window.location.href = '#ongoing';
+                        } else if (result.category === 'blog') {
+                            window.location.href = '#blog';
+                        }
+                        searchInput.value = '';
+                        searchInput.classList.remove('active');
+                        searchResults.classList.remove('active');
+                    });
+                    searchResults.appendChild(resultItem);
+                });
+            }
+            
+            searchResults.classList.add('active');
+        }
+
+        // Close search results when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.classList.remove('active');
             }
         });
 
