@@ -3,117 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dramawallah | Winter Forest Fantasy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Dramawallah - Anime Winter Dramas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         :root {
-            --deep-charcoal: #0d1219;
-            --forest-dark: #15202b;
-            --pine-green: #1a3d2f;
-            --teal: #2a9d8f;
-            --winter-blue: #8ecae6;
-            --icy-blue: #a8dadc;
-            --magic-purple: #9d4edd;
-            --magic-blue: #4cc9f0;
-            --glow-color: rgba(157, 78, 221, 0.3);
+            --dark-navy: #050510;
+            --snow-white: #f0f8ff;
+            --lantern-orange: #ff9e58;
+            --lantern-blue: #6ecbf5;
+            --frost-color: rgba(255, 255, 255, 0.1);
+            --glow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         body {
-            background-color: var(--deep-charcoal);
-            color: #e0e0e0;
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--dark-navy);
+            color: var(--snow-white);
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(42, 157, 143, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(157, 78, 221, 0.05) 0%, transparent 20%);
-            min-height: 100vh;
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: rgba(13, 18, 25, 0.8);
-            backdrop-filter: blur(10px);
+        /* Snow Animation */
+        .snow-container {
             position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(42, 157, 143, 0.2);
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
         }
 
-        .navbar {
+        .snow {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            z-index: 1000;
+            background: rgba(5, 5, 16, 0.8);
+            backdrop-filter: blur(10px);
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--teal), var(--magic-blue));
+            background: linear-gradient(45deg, var(--lantern-orange), var(--lantern-blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            display: flex;
-            align-items: center;
+            text-shadow: 0 0 15px rgba(255, 158, 88, 0.5);
         }
 
-        .logo i {
-            margin-right: 10px;
-            font-size: 24px;
-        }
-
-        .nav-links {
+        nav ul {
             display: flex;
             list-style: none;
+            gap: 2rem;
         }
 
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            color: var(--icy-blue);
+        nav a {
+            color: var(--snow-white);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
             position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--magic-blue);
-        }
-
-        .nav-links a::after {
+        nav a:after {
             content: '';
             position: absolute;
+            bottom: 0;
+            left: 0;
             width: 0;
             height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: linear-gradient(90deg, var(--teal), var(--magic-purple));
+            background: linear-gradient(90deg, var(--lantern-orange), var(--lantern-blue));
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after {
+        nav a:hover {
+            color: var(--lantern-blue);
+        }
+
+        nav a:hover:after {
             width: 100%;
         }
 
         /* Hero Section */
         .hero {
-            padding: 160px 0 100px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 0 5%;
             position: relative;
             overflow: hidden;
         }
@@ -125,414 +134,324 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(76, 201, 240, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(157, 78, 221, 0.1) 0%, transparent 50%);
+            background: linear-gradient(rgba(5, 5, 16, 0.7), rgba(5, 5, 16, 0.9)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23050510"/><path d="M0,50 L100,50 M50,0 L50,100" stroke="%231a1a2e" stroke-width="1"/></svg>');
             z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 10;
         }
 
         .hero h1 {
             font-size: 4rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--winter-blue), var(--magic-purple));
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--snow-white), var(--lantern-blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 20px rgba(76, 201, 240, 0.3);
+            text-shadow: 0 0 20px rgba(110, 203, 245, 0.5);
         }
 
         .hero p {
             font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            color: var(--icy-blue);
-            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: rgba(240, 248, 255, 0.8);
         }
 
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        /* Button Styles */
-        .btn {
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-weight: 600;
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--lantern-orange), var(--lantern-blue));
+            color: var(--dark-navy);
             text-decoration: none;
+            font-weight: 700;
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(255, 158, 88, 0.5);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--teal), var(--magic-blue));
-            color: var(--deep-charcoal);
-            box-shadow: 0 4px 15px rgba(42, 157, 143, 0.4);
-        }
-
-        .btn-primary:hover {
+        .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(42, 157, 143, 0.6);
+            box-shadow: 0 0 30px rgba(255, 158, 88, 0.7);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--winter-blue);
-            border: 2px solid var(--teal);
+        /* Latest Dramas Section */
+        .latest-dramas {
+            padding: 5rem 5%;
         }
 
-        .btn-secondary:hover {
-            background: rgba(42, 157, 143, 0.1);
-            box-shadow: 0 0 15px rgba(42, 157, 143, 0.4);
-        }
-
-        .btn i {
-            margin-right: 8px;
-        }
-
-        /* Cards Section */
         .section-title {
-            text-align: center;
-            margin-bottom: 50px;
             font-size: 2.5rem;
-            color: var(--winter-blue);
+            margin-bottom: 3rem;
+            text-align: center;
             position: relative;
         }
 
-        .section-title::after {
+        .section-title:after {
             content: '';
             position: absolute;
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--teal), var(--magic-purple));
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            border-radius: 3px;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--lantern-orange), var(--lantern-blue));
         }
 
-        .cards-container {
+        .drama-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
-        .card {
-            background: rgba(21, 32, 43, 0.7);
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.4s ease;
-            position: relative;
+        .drama-card {
+            background: rgba(10, 15, 30, 0.7);
+            border-radius: 10px;
             overflow: hidden;
-            border: 1px solid rgba(42, 157, 143, 0.2);
+            transition: all 0.5s ease;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .card::before {
+        .drama-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(110, 203, 245, 0.3);
+        }
+
+        .drama-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(42, 157, 143, 0.1), rgba(157, 78, 221, 0.1));
+            background: linear-gradient(135deg, rgba(255, 158, 88, 0.1), rgba(110, 203, 245, 0.1));
             opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: -1;
+            transition: opacity 0.3s ease;
+            z-index: 1;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            border-color: rgba(76, 201, 240, 0.4);
-        }
-
-        .card:hover::before {
+        .drama-card:hover::before {
             opacity: 1;
         }
 
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--teal), var(--magic-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--winter-blue);
-        }
-
-        .card p {
-            color: #b0b0b0;
-            line-height: 1.6;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 0;
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
             position: relative;
+            overflow: hidden;
         }
 
-        .features::before {
+        .card-image::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 10% 80%, rgba(157, 78, 221, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 20%, rgba(76, 201, 240, 0.05) 0%, transparent 40%);
-            z-index: -1;
+            background: linear-gradient(to bottom, transparent, rgba(5, 5, 16, 0.8));
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--snow-white);
+        }
+
+        .card-content p {
+            color: rgba(240, 248, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* Footer */
         footer {
-            background-color: var(--forest-dark);
-            padding: 60px 0 30px;
-            border-top: 1px solid rgba(42, 157, 143, 0.2);
+            padding: 3rem 5%;
+            text-align: center;
+            background: rgba(5, 5, 16, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 5rem;
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .footer-column h3 {
-            color: var(--winter-blue);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--lantern-orange), var(--lantern-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
         }
 
         .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
         }
 
         .footer-links a {
-            color: #b0b0b0;
+            color: rgba(240, 248, 255, 0.7);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: var(--magic-blue);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(42, 157, 143, 0.1);
-            color: var(--teal);
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--teal);
-            color: var(--deep-charcoal);
-            transform: translateY(-3px);
+            color: var(--lantern-blue);
         }
 
         .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #888;
+            color: rgba(240, 248, 255, 0.5);
             font-size: 0.9rem;
+            margin-top: 2rem;
         }
 
-        /* Animations */
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .floating {
-            animation: float 5s ease-in-out infinite;
-        }
-
-        /* Fireflies / Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--magic-blue);
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: particle-float 15s infinite linear;
-        }
-
-        .particle:nth-child(2n) {
-            background: var(--magic-purple);
-            animation-duration: 20s;
-        }
-
-        .particle:nth-child(3n) {
-            background: var(--teal);
-            animation-duration: 25s;
-        }
-
-        @keyframes particle-float {
-            0% {
-                transform: translateY(100vh) translateX(0);
-            }
-            100% {
-                transform: translateY(-100px) translateX(20px);
-            }
-        }
-
-        /* Leaf Animation */
-        .leaf {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: transparent;
-            opacity: 0;
-            z-index: -1;
-        }
-
-        .leaf::before {
-            content: '❄';
-            color: var(--winter-blue);
-            font-size: 20px;
-        }
-
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 15px 0;
-            }
-            
-            .nav-links {
-                margin-top: 20px;
-            }
-            
-            .nav-links li {
-                margin: 0 15px;
-            }
-            
             .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
+            nav ul {
+                gap: 1rem;
             }
             
-            .btn {
-                width: 200px;
-                margin-bottom: 10px;
+            .drama-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .drama-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Particles Background -->
-    <div class="particles" id="particles"></div>
+    <!-- Snow Animation -->
+    <div class="snow-container" id="snowContainer"></div>
 
     <!-- Header -->
     <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <i class="fas fa-tree"></i>
-                    Dramawallah
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Stories</a></li>
-                    <li><a href="#">Characters</a></li>
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
-            </nav>
-        </div>
+        <div class="logo">Dramawallah</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#dramas">Dramas</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1 class="floating">Winter Forest Fantasies</h1>
-            <p>Step into a world where winter forests come alive with magical creatures, ancient spirits, and enchanting tales. Explore the beauty of nature through an anime-inspired lens.</p>
-            <div class="hero-buttons">
-                <a href="#" class="btn btn-primary">
-                    <i class="fas fa-play"></i> Begin Journey
-                </a>
-                <a href="#" class="btn btn-secondary">
-                    <i class="fas fa-book-open"></i> Explore Stories
-                </a>
-            </div>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Winter Tales Unfold</h1>
+            <p>Immerse yourself in captivating anime-inspired winter dramas. Where every snowflake tells a story and every lantern lights a path to adventure.</p>
+            <a href="#dramas" class="cta-button">Explore Dramas</a>
         </div>
     </section>
 
-    <!-- Cards Section -->
-    <section class="features">
-        <div class="container">
-            <h2 class="section-title">Enchanting Features</h2>
-            <div class="cards-container">
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-moon"></i>
+    <!-- Latest Dramas Section -->
+    <section class="latest-dramas" id="dramas">
+        <h2 class="section-title">Latest Dramas</h2>
+        <div class="drama-grid">
+            <!-- Drama Card 1 -->
+            <div class="drama-card">
+                <div class="card-image"></div>
+                <div class="card-content">
+                    <h3>Snowfall Chronicles</h3>
+                    <p>A tale of love and destiny set against the backdrop of a mystical winter festival.</p>
+                    <div class="category-tags">
+                        <span class="tag">Romance</span>
+                        <span class="tag">Fantasy</span>
+                        <span class="tag">Winter</span>
                     </div>
-                    <h3>Moonlit Forests</h3>
-                    <p>Discover serene landscapes bathed in the gentle glow of moonlight, where shadows dance and magic awakens.</p>
                 </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-snowflake"></i>
+            </div>
+
+            <!-- Drama Card 2 -->
+            <div class="drama-card">
+                <div class="card-image"></div>
+                <div class="card-content">
+                    <h3>Lantern's Promise</h3>
+                    <p>Two souls bound by a promise made under the glow of winter lanterns.</p>
+                    <div class="category-tags">
+                        <span class="tag">Drama</span>
+                        <span class="tag">Slice of Life</span>
                     </div>
-                    <h3>Winter Whispers</h3>
-                    <p>Listen to the soft whispers of winter winds as they carry tales of ancient spirits and forgotten lore.</p>
                 </div>
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-sparkles"></i>
+            </div>
+
+            <!-- Drama Card 3 -->
+            <div class="drama-card">
+                <div class="card-image"></div>
+                <div class="card-content">
+                    <h3>Frostbound Hearts</h3>
+                    <p>In a world where emotions manifest as ice, two hearts must melt the frost between them.</p>
+                    <div class="category-tags">
+                        <span class="tag">Fantasy</span>
+                        <span class="tag">Action</span>
+                        <span class="tag">Winter</span>
                     </div>
-                    <h3>Magical Creatures</h3>
-                    <p>Encounter mystical beings that inhabit these enchanted woods, each with their own unique stories.</p>
+                </div>
+            </div>
+
+            <!-- Drama Card 4 -->
+            <div class="drama-card">
+                <div class="card-image"></div>
+                <div class="card-content">
+                    <h3>Winter's Whisper</h3>
+                    <p>A mysterious voice in the snow leads a young girl on a journey of self-discovery.</p>
+                    <div class="category-tags">
+                        <span class="tag">Mystery</span>
+                        <span class="tag">Adventure</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -540,125 +459,79 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Dramawallah</h3>
-                    <p>Immerse yourself in the beauty of winter forests and anime-inspired fantasy worlds.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Explore</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Winter Tales</a></li>
-                        <li><a href="#">Character Gallery</a></li>
-                        <li><a href="#">Forest Lore</a></li>
-                        <li><a href="#">Seasonal Events</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
+        <div class="footer-content">
+            <div class="footer-logo">Dramawallah</div>
+            <p>Where winter tales come to life in cinematic anime-inspired dramas.</p>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#dramas">Dramas</a>
+                <a href="#categories">Categories</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Dramawallah. All rights reserved. | Crafted with magic and winter spirit</p>
+                &copy; 2023 Dramawallah. All rights reserved.
             </div>
         </div>
     </footer>
 
     <script>
-        // Create particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
+        // Snow Animation
+        function createSnow() {
+            const snowContainer = document.getElementById('snowContainer');
+            const snowCount = 100;
             
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
+            for (let i = 0; i < snowCount; i++) {
+                const snow = document.createElement('div');
+                snow.classList.add('snow');
                 
-                // Random position
-                const left = Math.random() * 100;
-                const top = Math.random() * 100;
+                // Random properties for each snowflake
+                const size = Math.random() * 5 + 5;
+                const posX = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 10 + 10;
+                const opacity = Math.random() * 0.7 + 0.3;
                 
-                particle.style.left = `${left}%`;
-                particle.style.top = `${top}%`;
+                snow.style.width = `${size}px`;
+                snow.style.height = `${size}px`;
+                snow.style.left = `${posX}vw`;
+                snow.style.animationDelay = `${delay}s`;
+                snow.style.animationDuration = `${duration}s`;
+                snow.style.opacity = opacity;
                 
-                // Random size
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Random animation delay
-                const delay = Math.random() * 15;
-                particle.style.animationDelay = `${delay}s`;
-                
-                particlesContainer.appendChild(particle);
+                snowContainer.appendChild(snow);
             }
         }
-        
-        // Create falling leaves on card hover
-        function createLeaves() {
-            const cards = document.querySelectorAll('.card');
+
+        // Drama Card Hover Effect
+        function initCardEffects() {
+            const cards = document.querySelectorAll('.drama-card');
             
             cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    const leafCount = 5;
+                card.addEventListener('mousemove', (e) => {
+                    const cardRect = card.getBoundingClientRect();
+                    const x = e.clientX - cardRect.left;
+                    const y = e.clientY - cardRect.top;
                     
-                    for (let i = 0; i < leafCount; i++) {
-                        const leaf = document.createElement('div');
-                        leaf.classList.add('leaf');
-                        
-                        // Random position around the card
-                        const left = Math.random() * 100;
-                        leaf.style.left = `${left}%`;
-                        leaf.style.top = '-20px';
-                        
-                        // Random animation
-                        const animationDuration = Math.random() * 2 + 1;
-                        leaf.style.animation = `fall ${animationDuration}s linear forwards`;
-                        
-                        card.appendChild(leaf);
-                        
-                        // Remove leaf after animation
-                        setTimeout(() => {
-                            leaf.remove();
-                        }, animationDuration * 1000);
-                    }
+                    const centerX = cardRect.width / 2;
+                    const centerY = cardRect.height / 2;
+                    
+                    const angleY = (x - centerX) / 20;
+                    const angleX = (centerY - y) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-10px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
                 });
             });
         }
-        
-        // Initialize animations
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            createLeaves();
-            
-            // Add keyframe for falling leaves
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fall {
-                    0% {
-                        transform: translateY(0) rotate(0deg);
-                        opacity: 1;
-                    }
-                    100% {
-                        transform: translateY(300px) rotate(360deg);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            createSnow();
+            initCardEffects();
         });
     </script>
 </body>
