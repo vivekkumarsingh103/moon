@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusStream | Futuristic Media Hub</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Anime Dreamscape</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* ===== CSS VARIABLES ===== */
         :root {
-            --bg-dark: #0e0e0e;
-            --bg-darker: #080808;
-            --bg-card: #1a1a1a;
-            --accent-blue: #00a8ff;
-            --accent-purple: #9c27b0;
-            --accent-teal: #00d4d4;
-            --text-light: #f5f5f7;
-            --text-gray: #a1a1a6;
-            --transition: all 0.3s ease;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            --glow-blue: 0 0 15px rgba(0, 168, 255, 0.7);
-            --glow-purple: 0 0 15px rgba(156, 39, 176, 0.7);
+            --black: #0d0d0d;
+            --pink: #ffbde6;
+            --lavender: #c4a7ff;
+            --cyan: #88eaff;
+            --card-bg: rgba(30, 30, 40, 0.6);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --text-light: rgba(255, 255, 255, 0.85);
+            --text-lighter: rgba(255, 255, 255, 0.6);
         }
 
-        /* ===== BASE STYLES ===== */
         * {
             margin: 0;
             padding: 0;
@@ -31,102 +26,41 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
+            background-color: var(--black);
             color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(196, 167, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(136, 234, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(255, 189, 230, 0.03) 0%, transparent 30%);
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* ===== TYPOGRAPHY ===== */
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--accent-blue);
-            border-radius: 2px;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            color: var(--text-gray);
-            margin-bottom: 1rem;
-        }
-
-        /* ===== HEADER & NAVIGATION ===== */
-        header {
-            background-color: rgba(14, 14, 14, 0.9);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
+        /* Navigation */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 0;
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .logo {
-            display: flex;
-            align-items: center;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 500;
             font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-light);
-        }
-
-        .logo i {
-            color: var(--accent-blue);
-            margin-right: 10px;
-            font-size: 2rem;
+            background: linear-gradient(90deg, var(--pink), var(--lavender));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255, 189, 230, 0.3);
         }
 
         .nav-links {
@@ -134,616 +68,454 @@
             gap: 2rem;
         }
 
-        .nav-links a {
-            font-weight: 500;
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 400;
             position: relative;
             padding: 0.5rem 0;
-            transition: var(--transition);
+            transition: color 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--accent-blue);
+        .nav-link:hover {
+            color: var(--pink);
         }
 
-        .nav-links a::after {
+        .nav-link::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--accent-blue);
-            transition: var(--transition);
+            background: linear-gradient(90deg, var(--pink), var(--lavender));
+            transition: width 0.3s ease;
+            border-radius: 2px;
         }
 
-        .nav-links a:hover::after {
+        .nav-link:hover::after {
             width: 100%;
         }
 
+        .search-container {
+            position: relative;
+            width: 250px;
+        }
+
         .search-bar {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 0.5rem 1rem;
-            transition: var(--transition);
-        }
-
-        .search-bar:focus-within {
-            box-shadow: var(--glow-blue);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .search-bar input {
-            background: transparent;
-            border: none;
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(30, 30, 40, 0.5);
             color: var(--text-light);
-            padding: 0.5rem;
-            width: 200px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
             outline: none;
+            border-color: var(--lavender);
+            box-shadow: 0 0 15px rgba(196, 167, 255, 0.3);
         }
 
-        .search-bar i {
-            color: var(--text-gray);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* ===== HERO SECTION ===== */
+        /* Hero Section */
         .hero {
-            margin-top: 80px;
-            height: 70vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
+            height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            margin-top: 80px;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        .hero-title {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 4rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--pink), var(--lavender), var(--cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 189, 230, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            color: var(--text-lighter);
+        }
+
+        .cta-button {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            background: linear-gradient(90deg, var(--pink), var(--lavender));
+            color: var(--black);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 189, 230, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(255, 189, 230, 0.5);
+        }
+
+        .anime-shapes {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent 65%, rgba(0, 168, 255, 0.1) 100%);
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.5;
         }
 
-        .hero-content {
-            max-width: 600px;
-            z-index: 1;
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.4;
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--pink);
+            top: 10%;
+            left: 5%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--lavender);
+            bottom: 10%;
+            right: 5%;
+            animation: float 18s infinite ease-in-out reverse;
+        }
+
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--cyan);
+            top: 50%;
+            left: 70%;
+            animation: float 12s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-20px) translateX(10px);
+            }
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 2.5rem;
             margin-bottom: 2rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.8rem 1.8rem;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--accent-blue);
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background: #0088cc;
-            box-shadow: var(--glow-blue);
-            transform: translateY(-3px);
-        }
-
-        .btn-secondary {
-            background: transparent;
+            text-align: center;
             color: var(--text-light);
-            border: 2px solid var(--accent-purple);
         }
 
-        .btn-secondary:hover {
-            background: rgba(156, 39, 176, 0.2);
-            box-shadow: var(--glow-purple);
-            transform: translateY(-3px);
-        }
-
-        /* ===== FEATURED SECTION ===== */
-        .section {
-            padding: 5rem 0;
-        }
-
-        .section-header {
+        .filters {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .view-all {
-            color: var(--accent-blue);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: var(--transition);
-        }
-
-        .view-all:hover {
+            justify-content: center;
             gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
         }
 
-        .content-grid {
+        .filter-chip {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .filter-chip:hover, .filter-chip.active {
+            background: rgba(196, 167, 255, 0.1);
+            border-color: var(--lavender);
+            box-shadow: 0 0 10px rgba(196, 167, 255, 0.3);
+        }
+
+        .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
         }
 
         .card {
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
+            background: var(--card-bg);
+            border-radius: 20px;
             overflow: hidden;
-            transition: var(--transition);
-            box-shadow: var(--box-shadow);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
             position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--pink), var(--lavender), var(--cyan));
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: subtract;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), var(--glow-blue);
         }
 
-        .card-img {
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-image {
             width: 100%;
-            height: 380px;
+            height: 200px;
             object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .card:hover .card-img {
-            transform: scale(1.05);
+            background: linear-gradient(135deg, rgba(255, 189, 230, 0.1), rgba(136, 234, 255, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-lighter);
+            font-size: 3rem;
         }
 
         .card-content {
             padding: 1.5rem;
         }
 
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-gray);
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
         }
 
-        .quality-badge {
-            background: var(--accent-teal);
-            color: var(--bg-dark);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-weight: 600;
+        .card-description {
+            color: var(--text-lighter);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .card-tag {
+            padding: 0.3rem 0.7rem;
+            border-radius: 50px;
+            background: rgba(136, 234, 255, 0.1);
+            color: var(--cyan);
             font-size: 0.8rem;
         }
 
-        .card-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .card-actions .btn {
-            padding: 0.6rem 1.2rem;
-            font-size: 0.9rem;
-            flex: 1;
-            justify-content: center;
-        }
-
-        /* ===== CATEGORIES SECTION ===== */
-        .categories {
-            background: var(--bg-darker);
-        }
-
-        .category-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-light);
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--accent-blue);
-            color: white;
-            box-shadow: var(--glow-blue);
-        }
-
-        /* ===== FOOTER ===== */
+        /* Footer */
         footer {
-            background: var(--bg-darker);
-            padding: 4rem 0 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 5rem;
         }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-column h4 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .footer-column h4::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--accent-blue);
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: var(--text-gray);
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-blue);
-            padding-left: 5px;
-        }
-
-        .social-links {
+        .footer-links {
             display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
-        .social-links a:hover {
-            background: var(--accent-blue);
-            transform: translateY(-5px);
-            box-shadow: var(--glow-blue);
+        .footer-link {
+            color: var(--text-lighter);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--pink);
         }
 
         .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-gray);
+            color: var(--text-lighter);
             font-size: 0.9rem;
         }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-
-        /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 1024px) {
-            h1 { font-size: 3rem; }
-            .hero { height: 60vh; }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
             .navbar {
-                padding: 1rem 0;
-            }
-            
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--bg-darker);
                 flex-direction: column;
-                padding: 1.5rem;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                gap: 1rem;
+                padding: 1rem 5%;
             }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .search-bar input {
-                width: 150px;
-            }
-            
-            h1 { font-size: 2.5rem; }
-            .hero { height: 50vh; }
-            .content-grid {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            }
-        }
 
-        @media (max-width: 576px) {
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.8rem; }
-            .hero { height: 40vh; }
-            .cta-buttons {
-                flex-direction: column;
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .search-container {
                 width: 100%;
+                max-width: 300px;
             }
-            .btn {
-                width: 100%;
-                justify-content: center;
+
+            .hero-title {
+                font-size: 2.5rem;
             }
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-            .category-filters {
-                justify-content: center;
+
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">
-                    <i class="fas fa-play-circle"></i>
-                    NexusStream
-                </a>
-                
-                <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Movies</a></li>
-                    <li><a href="#">TV Shows</a></li>
-                    <li><a href="#">New Releases</a></li>
-                    <li><a href="#">My List</a></li>
-                </ul>
-                
-                <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search media...">
-                </div>
-                
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">夢の世界</div>
+        <div class="nav-links">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Explore</a>
+            <a href="#" class="nav-link">Collections</a>
+            <a href="#" class="nav-link">Community</a>
+            <a href="#" class="nav-link">About</a>
         </div>
-    </header>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search...">
+        </div>
+    </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <div class="hero-content fade-in">
-                <h1>Experience Entertainment Reimagined</h1>
-                <p>Stream the latest movies and TV shows in stunning 4K quality with futuristic interface and seamless experience.</p>
-                <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-play"></i> Start Streaming
-                    </a>
-                    <a href="#" class="btn btn-secondary">
-                        <i class="fas fa-info-circle"></i> Learn More
-                    </a>
-                </div>
-            </div>
+        <div class="anime-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
         </div>
+        <h1 class="hero-title">Discover Your Dreamscape</h1>
+        <p class="hero-subtitle">Immerse yourself in a world of aesthetic anime art, dreamy visuals, and captivating stories. Explore our curated collection of the most beautiful anime-inspired content.</p>
+        <button class="cta-button">Begin Journey</button>
     </section>
 
-    <!-- Featured Movies Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Featured Movies</h2>
-                <a href="#" class="view-all">
-                    View All <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            
-            <div class="content-grid">
-                <!-- Movie Card 1 -->
-                <div class="card fade-in">
-                    <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1194&q=80" alt="Movie Poster" class="card-img">
-                    <div class="card-content">
-                        <div class="card-meta">
-                            <span>2h 18m</span>
-                            <span class="quality-badge">4K UHD</span>
-                        </div>
-                        <h3>Cyber Nexus</h3>
-                        <p>In a futuristic world, a hacker uncovers a conspiracy that could change reality itself.</p>
-                        <div class="card-actions">
-                            <a href="#" class="btn btn-primary">
-                                <i class="fas fa-play"></i> Watch
-                            </a>
-                            <a href="#" class="btn btn-secondary">
-                                <i class="fas fa-download"></i> Download
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Movie Card 2 -->
-                <div class="card fade-in delay-1">
-                    <img src="https://images.unsplash.com/photo-1489599809505-fbe6c7bf98b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Movie Poster" class="card-img">
-                    <div class="card-content">
-                        <div class="card-meta">
-                            <span>1h 52m</span>
-                            <span class="quality-badge">HD</span>
-                        </div>
-                        <h3>Neon Dreams</h3>
-                        <p>A musician navigates the vibrant nightlife of a futuristic city while searching for meaning.</p>
-                        <div class="card-actions">
-                            <a href="#" class="btn btn-primary">
-                                <i class="fas fa-play"></i> Watch
-                            </a>
-                            <a href="#" class="btn btn-secondary">
-                                <i class="fas fa-download"></i> Download
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Movie Card 3 -->
-                <div class="card fade-in delay-2">
-                    <img src="https://images.unsplash.com/photo-1531299204818-ea1ed9ac5c24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Movie Poster" class="card-img">
-                    <div class="card-content">
-                        <div class="card-meta">
-                            <span>2h 35m</span>
-                            <span class="quality-badge">4K UHD</span>
-                        </div>
-                        <h3>Quantum Paradox</h3>
-                        <p>Scientists discover a way to travel between parallel universes, with unexpected consequences.</p>
-                        <div class="card-actions">
-                            <a href="#" class="btn btn-primary">
-                                <i class="fas fa-play"></i> Watch
-                            </a>
-                            <a href="#" class="btn btn-secondary">
-                                <i class="fas fa-download"></i> Download
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Movie Card 4 -->
-                <div class="card fade-in delay-3">
-                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Movie Poster" class="card-img">
-                    <div class="card-content">
-                        <div class="card-meta">
-                            <span>1h 48m</span>
-                            <span class="quality-badge">HD</span>
-                        </div>
-                        <h3>Digital Ghost</h3>
-                        <p>A detective hunts a mysterious hacker who can manipulate digital reality.</p>
-                        <div class="card-actions">
-                            <a href="#" class="btn btn-primary">
-                                <i class="fas fa-play"></i> Watch
-                            </a>
-                            <a href="#" class="btn btn-secondary">
-                                <i class="fas fa-download"></i> Download
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Content Section -->
+    <section class="content-section">
+        <h2 class="section-title">Featured Collections</h2>
+        
+        <div class="filters">
+            <div class="filter-chip active">All</div>
+            <div class="filter-chip">Fantasy</div>
+            <div class="filter-chip">Romance</div>
+            <div class="filter-chip">Sci-Fi</div>
+            <div class="filter-chip">Slice of Life</div>
+            <div class="filter-chip">Adventure</div>
         </div>
-    </section>
-
-    <!-- Categories Section -->
-    <section class="section categories">
-        <div class="container">
-            <div class="section-header">
-                <h2>Browse Categories</h2>
-                <a href="#" class="view-all">
-                    View All <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            
-            <div class="category-filters">
-                <button class="filter-btn active">All</button>
-                <button class="filter-btn">Action</button>
-                <button class="filter-btn">Sci-Fi</button>
-                <button class="filter-btn">Drama</button>
-                <button class="filter-btn">Thriller</button>
-                <button class="filter-btn">Comedy</button>
-                <button class="filter-btn">Horror</button>
-                <button class="filter-btn">Documentary</button>
-            </div>
-            
-            <div class="content-grid">
-                <!-- Category Card 1 -->
-                <div class="card fade-in">
-                    <img src="https://images.unsplash.com/photo-1489599809505-fbe6c7bf98b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Category" class="card-img">
-                    <div class="card-content">
-                        <h3>Sci-Fi & Fantasy</h3>
-                        <p>Explore futuristic worlds and imaginative realms.</p>
-                        <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
-                            Browse Collection
-                        </a>
+        
+        <div class="card-grid">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-image">🌸</div>
+                <div class="card-content">
+                    <h3 class="card-title">Cherry Blossom Dreams</h3>
+                    <p class="card-description">A serene collection of artworks featuring beautiful cherry blossom scenes with soft pastel colors.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Fantasy</span>
+                        <span class="card-tag">Nature</span>
                     </div>
                 </div>
-                
-                <!-- Category Card 2 -->
-                <div class="card fade-in delay-1">
-                    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Category" class="card-img">
-                    <div class="card-content">
-                        <h3>Action & Adventure</h3>
-                        <p>High-octane thrills and epic journeys await.</p>
-                        <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
-                            Browse Collection
-                        </a>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-image">🌙</div>
+                <div class="card-content">
+                    <h3 class="card-title">Lunar Chronicles</h3>
+                    <p class="card-description">Mystical moonlit adventures with glowing characters and ethereal landscapes.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Fantasy</span>
+                        <span class="card-tag">Adventure</span>
                     </div>
                 </div>
-                
-                <!-- Category Card 3 -->
-                <div class="card fade-in delay-2">
-                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1225&q=80" alt="Category" class="card-img">
-                    <div class="card-content">
-                        <h3>Drama & Romance</h3>
-                        <p>Emotional stories and heartfelt connections.</p>
-                        <a href="#" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
-                            Browse Collection
-                        </a>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-image">⚡</div>
+                <div class="card-content">
+                    <h3 class="card-title">Neon Cyberpunk</h3>
+                    <p class="card-description">Futuristic cityscapes with vibrant neon lights and cyber-enhanced characters.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Sci-Fi</span>
+                        <span class="card-tag">Futuristic</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="card">
+                <div class="card-image">🍃</div>
+                <div class="card-content">
+                    <h3 class="card-title">Whispering Winds</h3>
+                    <p class="card-description">Gentle stories of everyday life with soft, comforting visuals and heartfelt moments.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Slice of Life</span>
+                        <span class="card-tag">Comfort</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 5 -->
+            <div class="card">
+                <div class="card-image">💫</div>
+                <div class="card-content">
+                    <h3 class="card-title">Starlight Serenade</h3>
+                    <p class="card-description">Romantic tales under starry skies with dreamy characters and magical encounters.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Romance</span>
+                        <span class="card-tag">Fantasy</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 6 -->
+            <div class="card">
+                <div class="card-image">🌊</div>
+                <div class="card-content">
+                    <h3 class="card-title">Ocean Memories</h3>
+                    <p class="card-description">Nostalgic seaside stories with calming blue hues and gentle wave animations.</p>
+                    <div class="card-tags">
+                        <span class="card-tag">Slice of Life</span>
+                        <span class="card-tag">Nature</span>
                     </div>
                 </div>
             </div>
@@ -752,99 +524,42 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h4>NexusStream</h4>
-                    <p>The future of entertainment is here. Stream your favorite movies and shows in stunning quality with our futuristic platform.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Navigation</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Movies</a></li>
-                        <li><a href="#">TV Shows</a></li>
-                        <li><a href="#">New Releases</a></li>
-                        <li><a href="#">Trending</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Legal</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">Copyright</a></li>
-                        <li><a href="#">DMCA</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4>Support</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Device Support</a></li>
-                        <li><a href="#">Feedback</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 NexusStream. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> for the future</p>
-            </div>
+        <div class="footer-links">
+            <a href="#" class="footer-link">Home</a>
+            <a href="#" class="footer-link">About</a>
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Terms of Service</a>
+            <a href="#" class="footer-link">Contact</a>
         </div>
+        <p class="copyright">© 2023 Dreamscape Anime. All rights reserved.</p>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
-        // Filter Buttons Active State
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // Fade-in animation on scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const fadeInOnScroll = () => {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
+        // Add interactivity to filter chips
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                // Remove active class from all chips
+                document.querySelectorAll('.filter-chip').forEach(c => {
+                    c.classList.remove('active');
+                });
                 
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.style.opacity = 1;
-                    element.style.transform = 'translateY(0)';
-                }
+                // Add active class to clicked chip
+                this.classList.add('active');
+                
+                // In a real implementation, you would filter content here
             });
-        };
-        
-        // Set initial state for fade elements
-        fadeElements.forEach(element => {
-            element.style.opacity = 0;
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
         });
-        
-        window.addEventListener('scroll', fadeInOnScroll);
-        // Trigger once on load
-        window.addEventListener('load', fadeInOnScroll);
+
+        // Add subtle hover animation to cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
     </script>
 </body>
 </html>
