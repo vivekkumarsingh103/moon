@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dramawallah - Anime Winter Dramas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Dramawallah | Winter Edition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,20 +14,273 @@
         }
 
         :root {
-            --dark-navy: #050510;
-            --snow-white: #f0f8ff;
-            --lantern-orange: #ff9e58;
-            --lantern-blue: #6ecbf5;
-            --frost-color: rgba(255, 255, 255, 0.1);
-            --glow: 0 0 10px rgba(255, 255, 255, 0.3);
+            --primary-color: #a8d0e6;
+            --secondary-color: #374785;
+            --accent-color: #f76c6c;
+            --text-color: #e8e8e8;
+            --background-dark: #0a0e29;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glow-color: rgba(168, 208, 230, 0.5);
         }
 
         body {
-            font-family: 'Noto Sans JP', sans-serif;
-            background-color: var(--dark-navy);
-            color: var(--snow-white);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-dark);
             overflow-x: hidden;
             line-height: 1.6;
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 14, 41, 0.8), rgba(10, 14, 41, 0.4));
+        }
+
+        /* Header & Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 2rem;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-variant: small-caps;
+            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .sound-toggle {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            background: var(--glass-bg);
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 80px;
+        }
+
+        section {
+            padding: 5rem 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-variant: small-caps;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--glow-color);
+            letter-spacing: 2px;
+        }
+
+        /* Glass Morphism Cards */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(168, 208, 230, 0.3);
+        }
+
+        /* Home Section */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .post-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .post-title {
+            font-family: 'Cinzel', serif;
+            font-variant: small-caps;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 8px var(--glow-color);
+        }
+
+        .post-excerpt {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Ongoing Section */
+        .dramas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .drama-card {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .drama-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--glow-color);
+        }
+
+        .drama-title {
+            font-family: 'Cinzel', serif;
+            font-variant: small-caps;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .drama-info {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--accent-color);
+            width: 60%;
+            border-radius: 2px;
+        }
+
+        /* Blog Section */
+        .blog-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .blog-post {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .blog-title {
+            font-family: 'Cinzel', serif;
+            font-variant: small-caps;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 8px var(--glow-color);
+        }
+
+        .blog-meta {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+
+        .blog-content {
+            line-height: 1.8;
         }
 
         /* Snow Animation */
@@ -37,17 +291,17 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 100;
+            z-index: 10;
         }
 
-        .snow {
+        .snowflake {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-            filter: blur(1px);
-            animation: fall linear infinite;
+            top: -10px;
+            color: #fff;
+            font-size: 1rem;
+            opacity: 0.8;
+            animation: fall linear forwards;
+            text-shadow: 0 0 5px var(--glow-color);
         }
 
         @keyframes fall {
@@ -56,482 +310,249 @@
             }
         }
 
-        /* Header & Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: rgba(5, 5, 16, 0.8);
-            backdrop-filter: blur(10px);
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--lantern-orange), var(--lantern-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 15px rgba(255, 158, 88, 0.5);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: var(--snow-white);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-            transition: all 0.3s ease;
-        }
-
-        nav a:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--lantern-orange), var(--lantern-blue));
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--lantern-blue);
-        }
-
-        nav a:hover:after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 5%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(5, 5, 16, 0.7), rgba(5, 5, 16, 0.9)), 
-                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23050510"/><path d="M0,50 L100,50 M50,0 L50,100" stroke="%231a1a2e" stroke-width="1"/></svg>');
-            z-index: -1;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            z-index: 10;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--snow-white), var(--lantern-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(110, 203, 245, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: rgba(240, 248, 255, 0.8);
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: linear-gradient(45deg, var(--lantern-orange), var(--lantern-blue));
-            color: var(--dark-navy);
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 30px;
-            box-shadow: 0 0 20px rgba(255, 158, 88, 0.5);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(255, 158, 88, 0.7);
-        }
-
-        /* Latest Dramas Section */
-        .latest-dramas {
-            padding: 5rem 5%;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--lantern-orange), var(--lantern-blue));
-        }
-
-        .drama-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .drama-card {
-            background: rgba(10, 15, 30, 0.7);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.5s ease;
-            position: relative;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .drama-card:hover {
-            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(110, 203, 245, 0.3);
-        }
-
-        .drama-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 158, 88, 0.1), rgba(110, 203, 245, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1;
-        }
-
-        .drama-card:hover::before {
-            opacity: 1;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #1a1a2e, #16213e);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(5, 5, 16, 0.8));
-        }
-
-        .card-content {
-            padding: 1.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .card-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--snow-white);
-        }
-
-        .card-content p {
-            color: rgba(240, 248, 255, 0.7);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .category-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            padding: 0.3rem 0.8rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
         /* Footer */
         footer {
-            padding: 3rem 5%;
             text-align: center;
-            background: rgba(5, 5, 16, 0.9);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 5rem;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            border-top: 1px solid var(--glass-border);
         }
 
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--lantern-orange), var(--lantern-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
             margin-bottom: 1rem;
         }
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
         }
 
-        .footer-links a {
-            color: rgba(240, 248, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--lantern-blue);
+        .social-links a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--glow-color);
         }
 
         .copyright {
-            color: rgba(240, 248, 255, 0.5);
             font-size: 0.9rem;
-            margin-top: 2rem;
+            opacity: 0.7;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            header {
+                flex-direction: column;
+                padding: 1rem;
             }
-            
-            nav ul {
-                gap: 1rem;
-            }
-            
-            .drama-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-        }
 
-        @media (max-width: 480px) {
-            .hero h1 {
+            nav ul {
+                margin-top: 1rem;
+            }
+
+            nav li {
+                margin: 0 0.5rem;
+            }
+
+            .section-title {
                 font-size: 2rem;
             }
-            
-            nav {
-                display: none;
-            }
-            
-            .drama-grid {
+
+            .posts-grid, .dramas-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop id="bgVideo">
+            <!-- In a real implementation, you would use background.mp4 here -->
+            <source src="https://raw.githubusercontent.com/vivekkumarsingh103/moon/main/background.mp4?raw=1">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
     <!-- Snow Animation -->
     <div class="snow-container" id="snowContainer"></div>
 
     <!-- Header -->
     <header>
-        <div class="logo">Dramawallah</div>
+        <div class="logo">Drama<span>wallah</span></div>
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#dramas">Dramas</a></li>
-                <li><a href="#categories">Categories</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#ongoing">Ongoing</a></li>
+                <li><a href="#blog">Blog</a></li>
             </ul>
         </nav>
+        <button class="sound-toggle" id="soundToggle">
+            <i class="fas fa-volume-mute"></i>
+        </button>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Winter Tales Unfold</h1>
-            <p>Immerse yourself in captivating anime-inspired winter dramas. Where every snowflake tells a story and every lantern lights a path to adventure.</p>
-            <a href="#dramas" class="cta-button">Explore Dramas</a>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main>
+        <!-- Home Section -->
+        <section id="home">
+            <h2 class="section-title">Latest Posts</h2>
+            <div class="posts-grid">
+                <div class="glass-card post-card">
+                    <img src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Winter Drama" class="post-image">
+                    <h3 class="post-title">Frozen Hearts: A Winter Tale</h3>
+                    <p class="post-excerpt">Explore the chilling story of love and betrayal in the coldest winter of the century...</p>
+                </div>
+                <div class="glass-card post-card">
+                    <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Snowy Drama" class="post-image">
+                    <h3 class="post-title">Snowfall Secrets</h3>
+                    <p class="post-excerpt">What lies beneath the pristine snow? Uncover the mysteries of a small mountain town...</p>
+                </div>
+                <div class="glass-card post-card">
+                    <img src="https://images.unsplash.com/photo-1542202229-7d93c33f5d4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Icy Drama" class="post-image">
+                    <h3 class="post-title">The Ice Queen's Reign</h3>
+                    <p class="post-excerpt">A powerful ruler with a frozen heart faces her greatest challenge when warmth enters her kingdom...</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- Latest Dramas Section -->
-    <section class="latest-dramas" id="dramas">
-        <h2 class="section-title">Latest Dramas</h2>
-        <div class="drama-grid">
-            <!-- Drama Card 1 -->
-            <div class="drama-card">
-                <div class="card-image"></div>
-                <div class="card-content">
-                    <h3>Snowfall Chronicles</h3>
-                    <p>A tale of love and destiny set against the backdrop of a mystical winter festival.</p>
-                    <div class="category-tags">
-                        <span class="tag">Romance</span>
-                        <span class="tag">Fantasy</span>
-                        <span class="tag">Winter</span>
+        <!-- Ongoing Section -->
+        <section id="ongoing">
+            <h2 class="section-title">Ongoing Dramas</h2>
+            <div class="dramas-grid">
+                <div class="glass-card drama-card">
+                    <div class="drama-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <h3 class="drama-title">Winter's Edge</h3>
+                    <p class="drama-info">Ep 12/24 • Fantasy</p>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+                <div class="glass-card drama-card">
+                    <div class="drama-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3 class="drama-title">Frostbound</h3>
+                    <p class="drama-info">Ep 8/16 • Mystery</p>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+                <div class="glass-card drama-card">
+                    <div class="drama-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <h3 class="drama-title">Northern Lights</h3>
+                    <p class="drama-info">Ep 15/20 • Romance</p>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+                <div class="glass-card drama-card">
+                    <div class="drama-icon">
+                        <i class="fas fa-icicles"></i>
+                    </div>
+                    <h3 class="drama-title">Glacial Heart</h3>
+                    <p class="drama-info">Ep 5/12 • Drama</p>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Drama Card 2 -->
-            <div class="drama-card">
-                <div class="card-image"></div>
-                <div class="card-content">
-                    <h3>Lantern's Promise</h3>
-                    <p>Two souls bound by a promise made under the glow of winter lanterns.</p>
-                    <div class="category-tags">
-                        <span class="tag">Drama</span>
-                        <span class="tag">Slice of Life</span>
+        <!-- Blog Section -->
+        <section id="blog">
+            <h2 class="section-title">Latest Blog Posts</h2>
+            <div class="blog-container">
+                <div class="blog-post">
+                    <h3 class="blog-title">The Art of Winter Cinematography</h3>
+                    <div class="blog-meta">December 10, 2023 • 5 min read</div>
+                    <div class="blog-content">
+                        <p>Creating compelling winter scenes requires a delicate balance between capturing the beauty of the season and conveying the emotional depth of the story. The cold, stark landscapes can serve as powerful metaphors for isolation, purity, or emotional distance.</p>
+                        <p>In this post, we explore how directors use winter settings to enhance their narratives and create memorable cinematic moments that resonate with audiences long after the credits roll.</p>
+                    </div>
+                </div>
+                <div class="blog-post">
+                    <h3 class="blog-title">Behind the Scenes: Creating Winter Magic</h3>
+                    <div class="blog-meta">December 5, 2023 • 7 min read</div>
+                    <div class="blog-content">
+                        <p>From artificial snow to temperature-controlled sets, creating convincing winter environments is both an art and a science. Our production team shares their secrets for bringing winter to life, even when filming in the middle of summer.</p>
+                        <p>Discover the techniques and technologies that help create the immersive winter worlds that captivate viewers and transport them to frosty realms of drama and intrigue.</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Drama Card 3 -->
-            <div class="drama-card">
-                <div class="card-image"></div>
-                <div class="card-content">
-                    <h3>Frostbound Hearts</h3>
-                    <p>In a world where emotions manifest as ice, two hearts must melt the frost between them.</p>
-                    <div class="category-tags">
-                        <span class="tag">Fantasy</span>
-                        <span class="tag">Action</span>
-                        <span class="tag">Winter</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Drama Card 4 -->
-            <div class="drama-card">
-                <div class="card-image"></div>
-                <div class="card-content">
-                    <h3>Winter's Whisper</h3>
-                    <p>A mysterious voice in the snow leads a young girl on a journey of self-discovery.</p>
-                    <div class="category-tags">
-                        <span class="tag">Mystery</span>
-                        <span class="tag">Adventure</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo">Dramawallah</div>
-            <p>Where winter tales come to life in cinematic anime-inspired dramas.</p>
-            <div class="footer-links">
-                <a href="#home">Home</a>
-                <a href="#dramas">Dramas</a>
-                <a href="#categories">Categories</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div class="copyright">
-                &copy; 2023 Dramawallah. All rights reserved.
-            </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Dramawallah. All rights reserved.
         </div>
     </footer>
 
     <script>
-        // Snow Animation
-        function createSnow() {
-            const snowContainer = document.getElementById('snowContainer');
-            const snowCount = 100;
+        // Snowflake Animation
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 5 + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
             
-            for (let i = 0; i < snowCount; i++) {
-                const snow = document.createElement('div');
-                snow.classList.add('snow');
-                
-                // Random properties for each snowflake
-                const size = Math.random() * 5 + 5;
-                const posX = Math.random() * 100;
-                const delay = Math.random() * 10;
-                const duration = Math.random() * 10 + 10;
-                const opacity = Math.random() * 0.7 + 0.3;
-                
-                snow.style.width = `${size}px`;
-                snow.style.height = `${size}px`;
-                snow.style.left = `${posX}vw`;
-                snow.style.animationDelay = `${delay}s`;
-                snow.style.animationDuration = `${duration}s`;
-                snow.style.opacity = opacity;
-                
-                snowContainer.appendChild(snow);
-            }
+            document.getElementById('snowContainer').appendChild(snowflake);
+            
+            setTimeout(() => {
+                snowflake.remove();
+            }, 8000);
         }
 
-        // Drama Card Hover Effect
-        function initCardEffects() {
-            const cards = document.querySelectorAll('.drama-card');
+        // Create snowflakes at intervals
+        setInterval(createSnowflake, 100);
+
+        // Sound Toggle
+        const soundToggle = document.getElementById('soundToggle');
+        const bgVideo = document.getElementById('bgVideo');
+        let isMuted = true;
+
+        soundToggle.addEventListener('click', () => {
+            isMuted = !isMuted;
+            bgVideo.muted = isMuted;
             
-            cards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const cardRect = card.getBoundingClientRect();
-                    const x = e.clientX - cardRect.left;
-                    const y = e.clientY - cardRect.top;
-                    
-                    const centerX = cardRect.width / 2;
-                    const centerY = cardRect.height / 2;
-                    
-                    const angleY = (x - centerX) / 20;
-                    const angleX = (centerY - y) / 20;
-                    
-                    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-10px)`;
-                });
+            if (isMuted) {
+                soundToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            } else {
+                soundToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
                 });
             });
-        }
-
-        // Initialize everything when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            createSnow();
-            initCardEffects();
         });
     </script>
 </body>
