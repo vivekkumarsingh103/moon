@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DramaWallah | Premium Anime-Moon Streaming</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --moonlight-blue: #a8d8ea;
+            --moonlight-blue-dark: #7aa8c5;
+            --misty-grey: #e4e4e4;
+            --dark-bg: #0f172a;
+            --dark-bg-light: #1e293b;
+            --soft-shadow: rgba(168, 216, 234, 0.15);
+            --snow-white: rgba(255, 255, 255, 0.8);
+            --transition-slow: 0.5s ease;
+            --transition-medium: 0.3s ease;
+            --transition-fast: 0.2s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--misty-grey);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Snow Animation */
+        .snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .snow {
+            position: absolute;
+            top: -10px;
+            color: var(--snow-white);
+            font-size: 1.5rem;
+            user-select: none;
+            animation-name: fall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            transition: var(--transition-medium);
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 5px 20px var(--soft-shadow);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--moonlight-blue);
+            text-shadow: 0 0 15px var(--soft-shadow);
+            transition: var(--transition-medium);
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 20px rgba(168, 216, 234, 0.4);
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--misty-grey);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition-medium);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--moonlight-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--moonlight-blue);
+            transition: var(--transition-medium);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-bar {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(168, 216, 234, 0.2);
+            border-radius: 30px;
+            padding: 0.7rem 1.5rem;
+            color: var(--misty-grey);
+            width: 200px;
+            transition: var(--transition-medium);
+        }
+
+        .search-bar:focus {
+            width: 250px;
+            outline: none;
+            border-color: var(--moonlight-blue);
+            box-shadow: 0 0 10px var(--soft-shadow);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--moonlight-blue);
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--moonlight-blue);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #0f1a2f, #1a2b45);
+        }
+
+        .moon-bg {
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #e4e4e4 0%, #a8d8ea 30%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: 0.8;
+            box-shadow: 0 0 100px rgba(168, 216, 234, 0.4);
+            animation: moonGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes moonGlow {
+            0%, 100% {
+                box-shadow: 0 0 100px rgba(168, 216, 234, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 120px rgba(168, 216, 234, 0.6);
+            }
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 90px 40px, #ddd, transparent),
+                radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 160px 30px, #eee, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 5s linear infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeUp 1.5s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--moonlight-blue);
+            text-shadow: 0 0 20px var(--soft-shadow);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--misty-grey);
+        }
+
+        .featured-drama {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(168, 216, 234, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition-medium);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .featured-drama:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .featured-poster {
+            width: 200px;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            transition: var(--transition-medium);
+        }
+
+        .featured-poster:hover {
+            transform: scale(1.05);
+        }
+
+        .featured-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--moonlight-blue);
+        }
+
+        .featured-info p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .watch-btn {
+            background: linear-gradient(135deg, var(--moonlight-blue), var(--moonlight-blue-dark));
+            color: var(--dark-bg);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-medium);
+            box-shadow: 0 5px 15px rgba(168, 216, 234, 0.3);
+        }
+
+        .watch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(168, 216, 234, 0.4);
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--moonlight-blue);
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--moonlight-blue);
+            border-radius: 3px;
+        }
+
+        .drama-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .drama-card {
+            background: var(--dark-bg-light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition-slow);
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .drama-card:hover {
+            transform: translateY(-10px) rotateY(2deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--soft-shadow);
+        }
+
+        .card-poster {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+        }
+
+        .card-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-slow);
+        }
+
+        .drama-card:hover .card-poster img {
+            transform: scale(1.1);
+        }
+
+        .card-info {
+            padding: 1.5rem;
+        }
+
+        .card-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--moonlight-blue);
+        }
+
+        .card-info p {
+            font-size: 0.9rem;
+            color: var(--misty-grey);
+            opacity: 0.8;
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .card-rating i {
+            color: gold;
+            margin-right: 0.3rem;
+        }
+
+        /* Popup Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-medium);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--dark-bg-light);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform: scale(0.8);
+            transition: var(--transition-medium);
+            position: relative;
+            border: 1px solid rgba(168, 216, 234, 0.2);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(168, 216, 234, 0.1);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--moonlight-blue);
+        }
+
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: var(--misty-grey);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition-medium);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            background: rgba(168, 216, 234, 0.1);
+            color: var(--moonlight-blue);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .modal-body {
+            padding: 2rem;
+            display: flex;
+            gap: 2rem;
+            overflow-y: auto;
+            max-height: calc(90vh - 100px);
+        }
+
+        .modal-poster {
+            flex: 0 0 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-details {
+            flex: 1;
+        }
+
+        .modal-details h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--moonlight-blue);
+        }
+
+        .modal-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            background: rgba(168, 216, 234, 0.1);
+            color: var(--moonlight-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(168, 216, 234, 0.2);
+        }
+
+        .modal-description {
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-medium);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-watch {
+            background: linear-gradient(135deg, var(--moonlight-blue), var(--moonlight-blue-dark));
+            color: var(--dark-bg);
+            border: none;
+            box-shadow: 0 5px 15px rgba(168, 216, 234, 0.3);
+        }
+
+        .btn-watch:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(168, 216, 234, 0.4);
+        }
+
+        .btn-download {
+            background: transparent;
+            color: var(--moonlight-blue);
+            border: 1px solid var(--moonlight-blue);
+        }
+
+        .btn-download:hover {
+            background: rgba(168, 216, 234, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            padding: 3rem 5%;
+            border-top: 1px solid rgba(168, 216, 234, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--moonlight-blue);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--misty-grey);
+            text-decoration: none;
+            transition: var(--transition-medium);
+        }
+
+        .footer-links a:hover {
+            color: var(--moonlight-blue);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(168, 216, 234, 0.1);
+            color: var(--moonlight-blue);
+            transition: var(--transition-medium);
+        }
+
+        .social-links a:hover {
+            background: var(--moonlight-blue);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(168, 216, 234, 0.1);
+            color: var(--misty-grey);
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .modal-body {
+                flex-direction: column;
+            }
+            
+            .modal-poster {
+                flex: 0 0 auto;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 5%;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .featured-drama {
+                padding: 1.5rem;
+            }
+            
+            .drama-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .featured-poster {
+                width: 150px;
+                height: 225px;
+            }
+            
+            .drama-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .card-poster {
+                height: 250px;
+            }
+            
+            .modal-header {
+                padding: 1rem;
+            }
+            
+            .modal-body {
+                padding: 1.5rem;
+            }
+            
+            .modal-details h2 {
+                font-size: 1.5rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Snow Animation -->
+    <div class="snow-container" id="snowContainer"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-moon"></i>
+            DramaWallah
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active">Home</a>
+            <a href="#">Dramas</a>
+            <a href="#">Movies</a>
+            <a href="#">New Releases</a>
+            <a href="#">My List</a>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="moon-bg"></div>
+        <div class="stars"></div>
+        <div class="hero-content">
+            <h1>Immerse in Moonlit Stories</h1>
+            <p>Discover premium dramas under the serene glow of the anime moon</p>
+            <div class="featured-drama">
+                <div class="featured-poster">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Featured Drama">
+                </div>
+                <div class="featured-info">
+                    <h2>Moonlight Sonata</h2>
+                    <p>A touching story of love and destiny under the winter moon</p>
+                    <button class="watch-btn"><i class="fas fa-play"></i> Watch Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Dramas Section -->
+    <section class="content-section">
+        <h2 class="section-title">Popular Dramas</h2>
+        <div class="drama-grid">
+            <!-- Drama Card 1 -->
+            <div class="drama-card" data-id="1">
+                <div class="card-poster">
+                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1159&q=80" alt="Winter Tale">
+                </div>
+                <div class="card-info">
+                    <h3>Winter Tale</h3>
+                    <p>Romance • 2023</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.7/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drama Card 2 -->
+            <div class="drama-card" data-id="2">
+                <div class="card-poster">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1225&q=80" alt="Starlight Memories">
+                </div>
+                <div class="card-info">
+                    <h3>Starlight Memories</h3>
+                    <p>Drama • 2023</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.1/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drama Card 3 -->
+            <div class="drama-card" data-id="3">
+                <div class="card-poster">
+                    <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Frozen Heart">
+                </div>
+                <div class="card-info">
+                    <h3>Frozen Heart</h3>
+                    <p>Fantasy • 2022</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.4/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drama Card 4 -->
+            <div class="drama-card" data-id="4">
+                <div class="card-poster">
+                    <img src="https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1631&q=80" alt="Silent Snow">
+                </div>
+                <div class="card-info">
+                    <h3>Silent Snow</h3>
+                    <p>Mystery • 2023</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.9/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drama Card 5 -->
+            <div class="drama-card" data-id="5">
+                <div class="card-poster">
+                    <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Lunar Echoes">
+                </div>
+                <div class="card-info">
+                    <h3>Lunar Echoes</h3>
+                    <p>Sci-Fi • 2023</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.6/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drama Card 6 -->
+            <div class="drama-card" data-id="6">
+                <div class="card-poster">
+                    <img src="https://images.unsplash.com/photo-1489599809505-f3b2a0d0bef8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80" alt="Midnight Serenade">
+                </div>
+                <div class="card-info">
+                    <h3>Midnight Serenade</h3>
+                    <p>Romance • 2022</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.0/10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Releases Section -->
+    <section class="content-section">
+        <h2 class="section-title">New Releases</h2>
+        <div class="drama-grid">
+            <!-- Drama Card 7 -->
+            <div class="drama-card" data-id="7">
+                <div class="card-poster">
+                    <img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Winter's Child">
+                </div>
+                <div class="card-info">
+                    <h3>Winter's Child</h3>
+                    <p>Fantasy • 2023</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.8/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drama Card 8 -->
+            <div class="drama-card" data-id="8">
+                <div class="card-poster">
+                    <img src="https://images.unsplash.com/photo-1578632749014-ca77efd052eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Snowfall">
+                </div>
+                <div class="card-info">
+                    <h3>Snowfall</h3>
+                    <p>Drama • 2023</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.5/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drama Card 9 -->
+            <div class="drama-card" data-id="9">
+                <div class="card-poster">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Moon River">
+                </div>
+                <div class="card-info">
+                    <h3>Moon River</h3>
+                    <p>Romance • 2023</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.2/10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drama Card 10 -->
+            <div class="drama-card" data-id="10">
+                <div class="card-poster">
+                    <img src="https://images.unsplash.com/photo-1595769816263-9b910be24d5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1179&q=80" alt="Frostbound">
+                </div>
+                <div class="card-info">
+                    <h3>Frostbound</h3>
+                    <p>Thriller • 2023</p>
+                    <div class="card-rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.7/10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>DramaWallah</h3>
+                <p>Your premium destination for atmospheric, moonlit dramas and stories. Experience cinema under the serene glow of the anime moon.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Dramas</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">New Releases</a></li>
+                    <li><a href="#">My List</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Romance</a></li>
+                    <li><a href="#">Fantasy</a></li>
+                    <li><a href="#">Mystery</a></li>
+                    <li><a href="#">Drama</a></li>
+                    <li><a href="#">Thriller</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> support@dramawallah.com</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Moonlight Studios, Anime City</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 DramaWallah. All rights reserved. | Premium Streaming Experience</p>
+        </div>
+    </footer>
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content" id="modalContent">
+            <div class="modal-header">
+                <h3 class="modal-title">Drama Details</h3>
+                <button class="close-modal" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-poster">
+                    <img src="" alt="Drama Poster" id="modalPoster">
+                </div>
+                <div class="modal-details">
+                    <h2 id="modalDramaTitle">Drama Title</h2>
+                    <div class="modal-meta" id="modalMeta">
+                        <!-- Meta tags will be inserted here -->
+                    </div>
+                    <div class="modal-description" id="modalDescription">
+                        <!-- Description will be inserted here -->
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-watch"><i class="fas fa-play"></i> Watch Now</button>
+                        <button class="btn btn-download"><i class="fas fa-download"></i> Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create snowflakes
+        function createSnow() {
+            const snowContainer = document.getElementById('snowContainer');
+            const snowflakes = 50;
+            
+            for (let i = 0; i < snowflakes; i++) {
+                const snow = document.createElement('div');
+                snow.innerHTML = '❄';
+                snow.classList.add('snow');
+                
+                // Random properties for each snowflake
+                const size = Math.random() * 1.5 + 0.5;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 10 + 10;
+                const animationDelay = Math.random() * 10;
+                
+                snow.style.left = `${left}vw`;
+                snow.style.fontSize = `${size}rem`;
+                snow.style.animationDuration = `${animationDuration}s`;
+                snow.style.animationDelay = `${animationDelay}s`;
+                
+                snowContainer.appendChild(snow);
+            }
+        }
+
+        // Drama data for modal
+        const dramaData = {
+            1: {
+                title: "Winter Tale",
+                poster: "https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1159&q=80",
+                meta: ["Romance", "Drama", "2023", "16 Episodes"],
+                description: "A heartwarming story of two strangers who meet during a snowy winter and form an unexpected bond that changes their lives forever. Set against the backdrop of a picturesque winter landscape, this drama explores themes of love, loss, and the magic of human connection."
+            },
+            2: {
+                title: "Starlight Memories",
+                poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1225&q=80",
+                meta: ["Drama", "Slice of Life", "2023", "12 Episodes"],
+                description: "Follow the journey of a young photographer who returns to her hometown and rediscovers the memories of her past under the starlit sky. This emotional drama beautifully captures the essence of nostalgia and the power of memories."
+            },
+            3: {
+                title: "Frozen Heart",
+                poster: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                meta: ["Fantasy", "Romance", "2022", "20 Episodes"],
+                description: "In a world where emotions can literally freeze hearts, a young woman with the power to thaw frozen hearts embarks on a magical journey to save her kingdom from an eternal winter. A breathtaking fantasy with stunning winter visuals."
+            },
+            4: {
+                title: "Silent Snow",
+                poster: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1631&q=80",
+                meta: ["Mystery", "Thriller", "2023", "10 Episodes"],
+                description: "When a small town is covered in an unusual silent snow, a detective must unravel the mystery behind a series of disappearances. The serene winter landscape hides dark secrets in this gripping mystery thriller."
+            },
+            5: {
+                title: "Lunar Echoes",
+                poster: "https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                meta: ["Sci-Fi", "Drama", "2023", "8 Episodes"],
+                description: "In a future where the moon's phases affect human emotions, a scientist discovers a way to harness lunar energy, leading to unexpected consequences. A thought-provoking sci-fi drama with stunning lunar visuals."
+            },
+            6: {
+                title: "Midnight Serenade",
+                poster: "https://images.unsplash.com/photo-1489599809505-f3b2a0d0bef8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
+                meta: ["Romance", "Music", "2022", "16 Episodes"],
+                description: "A talented violinist and a reclusive composer find inspiration in each other during midnight practice sessions. Their musical collaboration turns into a beautiful romance under the moonlit sky."
+            },
+            7: {
+                title: "Winter's Child",
+                poster: "https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+                meta: ["Fantasy", "Family", "2023", "12 Episodes"],
+                description: "A child born during the first snowfall is said to have magical powers. Follow her journey as she navigates a world that both fears and needs her unique abilities. A heartwarming fantasy for all ages."
+            },
+            8: {
+                title: "Snowfall",
+                poster: "https://images.unsplash.com/photo-1578632749014-ca77efd052eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                meta: ["Drama", "Slice of Life", "2023", "10 Episodes"],
+                description: "The lives of several residents in a small mountain town intertwine during a record-breaking snowfall that isolates them from the outside world. A poignant drama about community and resilience."
+            },
+            9: {
+                title: "Moon River",
+                poster: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                meta: ["Romance", "Drama", "2023", "14 Episodes"],
+                description: "Two childhood friends reunite after years apart and discover that their connection is as strong as ever. Set against the beautiful backdrop of a riverside town, this romance will capture your heart."
+            },
+            10: {
+                title: "Frostbound",
+                poster: "https://images.unsplash.com/photo-1595769816263-9b910be24d5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1179&q=80",
+                meta: ["Thriller", "Mystery", "2023", "8 Episodes"],
+                description: "A group of researchers become trapped in an Arctic research station during a severe storm, only to discover they're not alone. A chilling thriller that will keep you on the edge of your seat."
+            }
+        };
+
+        // Modal functionality
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.getElementById('closeModal');
+        const modalPoster = document.getElementById('modalPoster');
+        const modalDramaTitle = document.getElementById('modalDramaTitle');
+        const modalMeta = document.getElementById('modalMeta');
+        const modalDescription = document.getElementById('modalDescription');
+        
+        // Open modal when drama card is clicked
+        document.querySelectorAll('.drama-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const dramaId = card.getAttribute('data-id');
+                const drama = dramaData[dramaId];
+                
+                if (drama) {
+                    modalPoster.src = drama.poster;
+                    modalDramaTitle.textContent = drama.title;
+                    
+                    // Clear and add meta tags
+                    modalMeta.innerHTML = '';
+                    drama.meta.forEach(tag => {
+                        const metaTag = document.createElement('span');
+                        metaTag.classList.add('meta-tag');
+                        metaTag.textContent = tag;
+                        modalMeta.appendChild(metaTag);
+                    });
+                    
+                    modalDescription.textContent = drama.description;
+                    
+                    // Show modal with animation
+                    modalOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside content
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize snow and other effects when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            createSnow();
+        });
+    </script>
+</body>
+</html>
