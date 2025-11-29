@@ -19,9 +19,9 @@
             --accent-color: #f76c6c;
             --text-color: #e8e8e8;
             --background-dark: #0a0e29;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glow-color: rgba(168, 208, 230, 0.5);
+            --glass-bg: rgba(30, 35, 70, 0.4); /* Increased opacity */
+            --glass-border: rgba(255, 255, 255, 0.2); /* Increased opacity */
+            --glow-color: rgba(168, 208, 230, 0.7); /* Increased opacity */
         }
 
         body {
@@ -56,7 +56,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(10, 14, 41, 0.8), rgba(10, 14, 41, 0.4));
+            background: linear-gradient(to bottom, rgba(10, 14, 41, 0.9), rgba(10, 14, 41, 0.6)); /* Increased opacity */
         }
 
         /* Header & Navigation */
@@ -68,7 +68,7 @@
             position: fixed;
             width: 100%;
             z-index: 100;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px); /* Reduced blur */
             background: var(--glass-bg);
             border-bottom: 1px solid var(--glass-border);
         }
@@ -115,11 +115,12 @@
         .search-container {
             display: flex;
             align-items: center;
+            position: relative;
         }
 
         .search-box {
             display: flex;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(20, 25, 60, 0.7); /* Increased opacity */
             border-radius: 30px;
             padding: 0.5rem 1rem;
             border: 1px solid var(--glass-border);
@@ -184,18 +185,18 @@
         /* Glass Morphism Cards */
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px); /* Reduced blur */
             border: 1px solid var(--glass-border);
             border-radius: 15px;
             padding: 1.5rem;
             transition: all 0.4s ease;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .glass-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgba(168, 208, 230, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(168, 208, 230, 0.4);
         }
 
         /* Home Section */
@@ -229,7 +230,7 @@
 
         .post-excerpt {
             font-size: 0.9rem;
-            opacity: 0.8;
+            opacity: 0.9; /* Increased opacity */
         }
 
         /* Ongoing Section */
@@ -260,12 +261,12 @@
 
         .drama-info {
             font-size: 0.8rem;
-            opacity: 0.7;
+            opacity: 0.9; /* Increased opacity */
         }
 
         .progress-bar {
             height: 4px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2); /* Increased opacity */
             border-radius: 2px;
             margin-top: 1rem;
             overflow: hidden;
@@ -301,12 +302,13 @@
 
         .blog-meta {
             font-size: 0.8rem;
-            opacity: 0.7;
+            opacity: 0.9; /* Increased opacity */
             margin-bottom: 1rem;
         }
 
         .blog-content {
             line-height: 1.8;
+            opacity: 0.95; /* Increased opacity */
         }
 
         /* Bot Posts Section */
@@ -324,7 +326,7 @@
 
         .bot-btn {
             background: var(--glass-bg);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px); /* Reduced blur */
             border: 1px solid var(--glass-border);
             color: var(--text-color);
             padding: 0.7rem 1.5rem;
@@ -337,7 +339,7 @@
         }
 
         .bot-btn:hover {
-            background: rgba(168, 208, 230, 0.1);
+            background: rgba(168, 208, 230, 0.2); /* Increased opacity */
             border-color: var(--primary-color);
             color: var(--primary-color);
         }
@@ -357,32 +359,33 @@
             display: flex;
             justify-content: space-between;
             font-size: 0.7rem;
-            opacity: 0.7;
+            opacity: 0.9; /* Increased opacity */
             margin-bottom: 0.5rem;
         }
 
         .bot-post-tag {
-            background: rgba(247, 108, 108, 0.2);
+            background: rgba(247, 108, 108, 0.4); /* Increased opacity */
             color: var(--accent-color);
             padding: 0.2rem 0.5rem;
             border-radius: 10px;
             font-size: 0.6rem;
         }
 
-        /* Search Results */
+        /* Search Results - IMPROVED VISIBILITY */
         .search-results {
             position: absolute;
             top: 100%;
             right: 0;
             width: 300px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
+            background: rgba(25, 30, 70, 0.95); /* Increased opacity significantly */
+            backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             border-radius: 10px;
             padding: 1rem;
             margin-top: 0.5rem;
             display: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
 
         .search-results.active {
@@ -391,9 +394,10 @@
 
         .search-result-item {
             padding: 0.8rem;
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
             transition: all 0.3s ease;
+            border-radius: 5px;
         }
 
         .search-result-item:last-child {
@@ -401,18 +405,20 @@
         }
 
         .search-result-item:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(168, 208, 230, 0.2); /* Increased opacity */
         }
 
         .search-result-title {
             font-weight: 500;
             margin-bottom: 0.3rem;
+            color: var(--text-color);
         }
 
         .search-result-type {
             font-size: 0.7rem;
-            opacity: 0.7;
+            opacity: 0.9; /* Increased opacity */
             text-transform: uppercase;
+            color: var(--primary-color);
         }
 
         /* Snow Animation */
@@ -431,7 +437,7 @@
             top: -10px;
             color: #fff;
             font-size: 1rem;
-            opacity: 0.8;
+            opacity: 0.7; /* Reduced opacity */
             animation: fall linear forwards;
             text-shadow: 0 0 5px var(--glow-color);
         }
@@ -446,7 +452,7 @@
         footer {
             text-align: center;
             padding: 2rem;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px); /* Reduced blur */
             background: var(--glass-bg);
             border-top: 1px solid var(--glass-border);
         }
@@ -471,7 +477,7 @@
 
         .copyright {
             font-size: 0.9rem;
-            opacity: 0.7;
+            opacity: 0.9; /* Increased opacity */
         }
 
         /* Responsive Design */
@@ -504,6 +510,11 @@
             .bot-controls {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .search-results {
+                width: 250px;
+                right: -50px;
             }
         }
     </style>
@@ -679,7 +690,7 @@
             snowflake.innerHTML = '❄';
             snowflake.style.left = Math.random() * 100 + 'vw';
             snowflake.style.animationDuration = Math.random() * 3 + 5 + 's';
-            snowflake.style.opacity = Math.random();
+            snowflake.style.opacity = Math.random() * 0.5 + 0.3; // Reduced opacity range
             snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
             
             document.getElementById('snowContainer').appendChild(snowflake);
@@ -690,7 +701,7 @@
         }
 
         // Create snowflakes at intervals
-        setInterval(createSnowflake, 100);
+        setInterval(createSnowflake, 150); // Reduced frequency
 
         // Search Functionality
         const searchBtn = document.getElementById('searchBtn');
