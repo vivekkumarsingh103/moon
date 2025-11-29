@@ -8,6 +8,26 @@ from config import BOT_TOKEN, ADMIN_IDS, SEARCH_TRIGGERS
 from database import Database
 from file_handler import FileHandler
 from website_manager import WebsiteManager
+import threading
+from health_check import start_health_server
+
+class DramawallahBot:
+    def __init__(self):
+        # ... existing code ...
+        
+        # Start health check server in background
+        self.start_health_server()
+    
+    def start_health_server(self):
+        """Start health check server in background thread"""
+        try:
+            health_thread = threading.Thread(target=start_health_server, daemon=True)
+            health_thread.start()
+            logger.info("✅ Health check server started")
+        except Exception as e:
+            logger.warning(f"❌ Health check server failed: {e}")
+
+# ... rest of your existing bot.py code ...
 
 # Setup logging
 logging.basicConfig(
