@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 import logging
 import re
-from config import BOT_TOKEN, ADMIN_IDS
+from config import BOT_TOKEN, ADMIN_IDS, SEARCH_TRIGGERS
 from database import Database
 from file_handler import FileHandler
 from website_manager import WebsiteManager
@@ -145,6 +145,31 @@ class DramawallahBot:
     def is_admin(self, user_id):
         """Check if user is admin"""
         return user_id in ADMIN_IDS
+    
+    def get_current_drama_names(self):
+        """Get current drama names from website data (always fresh)"""
+        try:
+            # Method 1: From website JSON (most current)
+            website_data = self.website.data
+            drama_names = []
+            
+            # Extract from all posts
+            for section in ["home_posts", "ongoing_dramas", "all_posts"]:
+                for post in website_data.get(section, []):
+                    title = post.get('title', '').lower()
+                    if title and title not in drama_names:
+                        drama_names.append(title)
+            
+            # Method 2: From database (fallback)
+            if not drama_names:
+                posts = self.db.get_all_posts()
+                drama_names = [post.get('title', '').lower() for post in posts if post.get('title')]
+            
+            return drama_names
+            
+        except Exception as e:
+            logger.error(f"Error getting drama names: {e}")
+            return []
     
     # ==================== /addpost FUNCTION ====================
     async def start_addpost(self, update: Update, context: CallbackContext):
@@ -297,6 +322,9 @@ class DramawallahBot:
             
             # Save to database
             self.db.insert_post(post_data)
+            
+            # Update search data with new drama
+            self.website.update_search_data()
             
             # Success message
             success_text = (
@@ -455,6 +483,9 @@ class DramawallahBot:
                 # Update website JSON
                 self.website.move_post("ongoing_dramas", "all_posts", drama_name)
                 
+                # Update search data
+                self.website.update_search_data()
+                
                 await query.edit_message_text(
                     f"✅ **{drama_name}** moved from Ongoing to All Posts!\n"
                     f"The drama is now marked as completed."
@@ -547,6 +578,9 @@ class DramawallahBot:
                 
                 # Update website
                 self.website.add_to_section("blog_posts", blog_data)
+                
+                # Update search data
+                self.website.update_search_data()
                 
                 await query.edit_message_text(
                     f"✅ **Blog Published Successfully!**\n\n"
@@ -688,56 +722,82 @@ class DramawallahBot:
             
             message_text = update.message.text.lower()
             
-            # Simple drama name detection (you can expand this list)
-            drama_keywords = [
-                'frozen hearts', 'snowfall secrets', 'ice queen', 'winter edge',
-                'frostbound', 'northern lights', 'glacial heart', 'winter tale'
-            ]
+            # Get CURRENT drama names from website (always fresh)
+            current_dramas = self.get_current_drama_names()
             
-            found_dramas = []
-            for drama in drama_keywords:
-                if drama in message_text:
-                    found_dramas.append(drama.title())
+            # Combine with general search triggers
+            all_keywords = current_dramas + SEARCH_TRIGGERS
             
-            if found_dramas:
-                # Search in website data
-                search_data = self.website.data.get("search_data", [])
-                results = []
-                
-                for drama_name in found_dramas:
-                    for item in search_data:
-                        if drama_name.lower() in item.get('title', '').lower():
-                            results.append(item)
-                            break
-                
-                if results:
-                    # Create result message
-                    result_text = f"🎬 @{update.effective_user.username} Here are the results you were searching for:\n\n"
-                    
-                    keyboard = []
-                    for result in results[:3]:  # Max 3 results
-                        if result['category'] == 'ongoing':
-                            url = "https://dramawallah.netlify.app/#ongoing"
-                        elif result['category'] == 'blog':
-                            url = "https://dramawallah.netlify.app/#blog"
-                        else:
-                            url = "https://dramawallah.netlify.app/#home"
-                        
-                        keyboard.append([InlineKeyboardButton(
-                            f"📺 {result['title']}",
-                            url=url
-                        )])
-                    
-                    reply_markup = InlineKeyboardMarkup(keyboard)
-                    
-                    await update.message.reply_text(
-                        result_text,
-                        reply_markup=reply_markup,
-                        reply_to_message_id=update.message.message_id
-                    )
+            # Check if message contains any relevant keywords
+            found_keywords = []
+            for keyword in all_keywords:
+                if keyword in message_text:
+                    found_keywords.append(keyword)
+            
+            if found_keywords:
+                await self.provide_search_results(update, found_keywords)
             
         except Exception as e:
             logger.error(f"Error in group search: {e}")
+    
+    async def provide_search_results(self, update: Update, found_keywords):
+        """Provide search results for found keywords"""
+        try:
+            # Get search data from website
+            search_data = self.website.data.get("search_data", [])
+            results = []
+            
+            # Find matching content
+            for keyword in found_keywords:
+                for item in search_data:
+                    if (keyword in item.get('title', '').lower() or 
+                        keyword in item.get('type', '').lower() or
+                        keyword in item.get('category', '').lower()):
+                        results.append(item)
+            
+            # Remove duplicates
+            unique_results = []
+            seen_titles = set()
+            for result in results:
+                if result['title'] not in seen_titles:
+                    unique_results.append(result)
+                    seen_titles.add(result['title'])
+            
+            if unique_results:
+                await self.send_search_results(update, unique_results)
+                
+        except Exception as e:
+            logger.error(f"Error providing search results: {e}")
+    
+    async def send_search_results(self, update: Update, results):
+        """Send formatted search results to group"""
+        try:
+            keyboard = []
+            for result in results[:3]:  # Max 3 results
+                if result['category'] == 'ongoing':
+                    url = "https://dramawallah.netlify.app/#ongoing"
+                elif result['category'] == 'blog':
+                    url = "https://dramawallah.netlify.app/#blog"
+                elif result['category'] == 'home':
+                    url = "https://dramawallah.netlify.app/#home"
+                else:
+                    url = "https://dramawallah.netlify.app/#all-posts"
+                
+                keyboard.append([InlineKeyboardButton(
+                    f"🎬 {result['title']}",
+                    url=url
+                )])
+            
+            reply_markup = InlineKeyboardMarkup(keyboard)
+            
+            await update.message.reply_text(
+                f"🔍 @{update.effective_user.username} Here are the results you were searching for:",
+                reply_markup=reply_markup,
+                reply_to_message_id=update.message.message_id
+            )
+            
+        except Exception as e:
+            logger.error(f"Error sending search results: {e}")
     
     # ==================== UTILITY FUNCTIONS ====================
     async def post_to_channel(self, processed_files, channel_link):
