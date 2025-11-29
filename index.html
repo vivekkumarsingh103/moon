@@ -19,9 +19,9 @@
             --accent-color: #f76c6c;
             --text-color: #e8e8e8;
             --background-dark: #0a0e29;
-            --glass-bg: rgba(30, 35, 70, 0.4); /* Increased opacity */
-            --glass-border: rgba(255, 255, 255, 0.2); /* Increased opacity */
-            --glow-color: rgba(168, 208, 230, 0.7); /* Increased opacity */
+            --glass-bg: rgba(30, 35, 70, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glow-color: rgba(168, 208, 230, 0.7);
         }
 
         body {
@@ -56,7 +56,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(10, 14, 41, 0.9), rgba(10, 14, 41, 0.6)); /* Increased opacity */
+            background: linear-gradient(to bottom, rgba(10, 14, 41, 0.9), rgba(10, 14, 41, 0.6));
         }
 
         /* Header & Navigation */
@@ -68,7 +68,7 @@
             position: fixed;
             width: 100%;
             z-index: 100;
-            backdrop-filter: blur(8px); /* Reduced blur */
+            backdrop-filter: blur(8px);
             background: var(--glass-bg);
             border-bottom: 1px solid var(--glass-border);
         }
@@ -120,7 +120,7 @@
 
         .search-box {
             display: flex;
-            background: rgba(20, 25, 60, 0.7); /* Increased opacity */
+            background: rgba(20, 25, 60, 0.7);
             border-radius: 30px;
             padding: 0.5rem 1rem;
             border: 1px solid var(--glass-border);
@@ -185,7 +185,7 @@
         /* Glass Morphism Cards */
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(8px); /* Reduced blur */
+            backdrop-filter: blur(8px);
             border: 1px solid var(--glass-border);
             border-radius: 15px;
             padding: 1.5rem;
@@ -230,7 +230,7 @@
 
         .post-excerpt {
             font-size: 0.9rem;
-            opacity: 0.9; /* Increased opacity */
+            opacity: 0.9;
         }
 
         /* Ongoing Section */
@@ -261,12 +261,12 @@
 
         .drama-info {
             font-size: 0.8rem;
-            opacity: 0.9; /* Increased opacity */
+            opacity: 0.9;
         }
 
         .progress-bar {
             height: 4px;
-            background: rgba(255, 255, 255, 0.2); /* Increased opacity */
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 2px;
             margin-top: 1rem;
             overflow: hidden;
@@ -302,13 +302,13 @@
 
         .blog-meta {
             font-size: 0.8rem;
-            opacity: 0.9; /* Increased opacity */
+            opacity: 0.9;
             margin-bottom: 1rem;
         }
 
         .blog-content {
             line-height: 1.8;
-            opacity: 0.95; /* Increased opacity */
+            opacity: 0.95;
         }
 
         /* Bot Posts Section */
@@ -326,7 +326,7 @@
 
         .bot-btn {
             background: var(--glass-bg);
-            backdrop-filter: blur(8px); /* Reduced blur */
+            backdrop-filter: blur(8px);
             border: 1px solid var(--glass-border);
             color: var(--text-color);
             padding: 0.7rem 1.5rem;
@@ -339,7 +339,7 @@
         }
 
         .bot-btn:hover {
-            background: rgba(168, 208, 230, 0.2); /* Increased opacity */
+            background: rgba(168, 208, 230, 0.2);
             border-color: var(--primary-color);
             color: var(--primary-color);
         }
@@ -359,25 +359,25 @@
             display: flex;
             justify-content: space-between;
             font-size: 0.7rem;
-            opacity: 0.9; /* Increased opacity */
+            opacity: 0.9;
             margin-bottom: 0.5rem;
         }
 
         .bot-post-tag {
-            background: rgba(247, 108, 108, 0.4); /* Increased opacity */
+            background: rgba(247, 108, 108, 0.4);
             color: var(--accent-color);
             padding: 0.2rem 0.5rem;
             border-radius: 10px;
             font-size: 0.6rem;
         }
 
-        /* Search Results - IMPROVED VISIBILITY */
+        /* Search Results */
         .search-results {
             position: absolute;
             top: 100%;
             right: 0;
             width: 300px;
-            background: rgba(25, 30, 70, 0.95); /* Increased opacity significantly */
+            background: rgba(25, 30, 70, 0.95);
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             border-radius: 10px;
@@ -405,7 +405,7 @@
         }
 
         .search-result-item:hover {
-            background: rgba(168, 208, 230, 0.2); /* Increased opacity */
+            background: rgba(168, 208, 230, 0.2);
         }
 
         .search-result-title {
@@ -416,7 +416,7 @@
 
         .search-result-type {
             font-size: 0.7rem;
-            opacity: 0.9; /* Increased opacity */
+            opacity: 0.9;
             text-transform: uppercase;
             color: var(--primary-color);
         }
@@ -437,7 +437,7 @@
             top: -10px;
             color: #fff;
             font-size: 1rem;
-            opacity: 0.7; /* Reduced opacity */
+            opacity: 0.7;
             animation: fall linear forwards;
             text-shadow: 0 0 5px var(--glow-color);
         }
@@ -452,7 +452,7 @@
         footer {
             text-align: center;
             padding: 2rem;
-            backdrop-filter: blur(8px); /* Reduced blur */
+            backdrop-filter: blur(8px);
             background: var(--glass-bg);
             border-top: 1px solid var(--glass-border);
         }
@@ -477,7 +477,7 @@
 
         .copyright {
             font-size: 0.9rem;
-            opacity: 0.9; /* Increased opacity */
+            opacity: 0.9;
         }
 
         /* Responsive Design */
@@ -523,7 +523,6 @@
     <!-- Video Background -->
     <div class="video-background">
         <video autoplay muted loop id="bgVideo">
-            <!-- In a real implementation, you would use background.mp4 here -->
             <source src="https://assets.codepen.io/3364143/snow-video.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
@@ -539,8 +538,8 @@
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#ongoing">Ongoing</a></li>
-                <li><a href="#blog">Blog</a></li>
                 <li><a href="#bot-posts">All Posts</a></li>
+                <li><a href="#blog">Blog</a></li>
             </ul>
         </nav>
         <div class="search-container">
@@ -627,6 +626,20 @@
             </div>
         </section>
 
+        <!-- All Posts Section (Moved before Blog) -->
+        <section id="bot-posts">
+            <h2 class="section-title">All Posts</h2>
+            <div class="bot-posts-container">
+                <div class="bot-controls">
+                    <button class="bot-btn" id="addPostBtn">Add New Post</button>
+                    <button class="bot-btn" id="clearPostsBtn">Clear All Posts</button>
+                </div>
+                <div class="bot-posts-grid" id="botPostsGrid">
+                    <!-- Bot posts will be added here dynamically -->
+                </div>
+            </div>
+        </section>
+
         <!-- Blog Section -->
         <section id="blog">
             <h2 class="section-title">Latest Blog Posts</h2>
@@ -646,19 +659,6 @@
                         <p>From artificial snow to temperature-controlled sets, creating convincing winter environments is both an art and a science. Our production team shares their secrets for bringing winter to life, even when filming in the middle of summer.</p>
                         <p>Discover the techniques and technologies that help create the immersive winter worlds that captivate viewers and transport them to frosty realms of drama and intrigue.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Bot Posts Section -->
-        <section id="bot-posts">
-            <h2 class="section-title">All Posts</h2>
-            <div class="bot-posts-container">
-                <div class="bot-controls">
-                    </button>
-                </div>
-                <div class="bot-posts-grid" id="botPostsGrid">
-                    <!-- Bot posts will be added here dynamically -->
                 </div>
             </div>
         </section>
@@ -685,7 +685,7 @@
             snowflake.innerHTML = '❄';
             snowflake.style.left = Math.random() * 100 + 'vw';
             snowflake.style.animationDuration = Math.random() * 3 + 5 + 's';
-            snowflake.style.opacity = Math.random() * 0.5 + 0.3; // Reduced opacity range
+            snowflake.style.opacity = Math.random() * 0.5 + 0.3;
             snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
             
             document.getElementById('snowContainer').appendChild(snowflake);
@@ -696,7 +696,7 @@
         }
 
         // Create snowflakes at intervals
-        setInterval(createSnowflake, 150); // Reduced frequency
+        setInterval(createSnowflake, 150);
 
         // Search Functionality
         const searchBtn = document.getElementById('searchBtn');
@@ -803,31 +803,6 @@
         const clearPostsBtn = document.getElementById('clearPostsBtn');
         const botPostsGrid = document.getElementById('botPostsGrid');
 
-        // Sample bot posts data
-        const botPosts = [
-            {
-                title: "Winter's First Snow",
-                excerpt: "The first snowfall of the season always brings a special magic to our dramas.",
-                image: "https://images.unsplash.com/photo-1483664852095-d6cc6870702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                tag: "Update",
-                timestamp: "2 hours ago"
-            },
-            {
-                title: "Behind the Frost: Episode 5",
-                excerpt: "A deep dive into the symbolism of ice crystals in our latest episode.",
-                image: "https://images.unsplash.com/photo-1517299321609-52687d1bc55a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                tag: "Analysis",
-                timestamp: "5 hours ago"
-            },
-            {
-                title: "Character Spotlight: Elara",
-                excerpt: "Exploring the motivations and backstory of our frost mage protagonist.",
-                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-                tag: "Character",
-                timestamp: "1 day ago"
-            }
-        ];
-
         // Function to add a bot post
         function addBotPost(post) {
             const postCard = document.createElement('div');
@@ -845,9 +820,6 @@
             
             botPostsGrid.appendChild(postCard);
         }
-
-        // Add initial bot posts
-        botPosts.forEach(post => addBotPost(post));
 
         // Add new post button functionality
         addPostBtn.addEventListener('click', () => {
