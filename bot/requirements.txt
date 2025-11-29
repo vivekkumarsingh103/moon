@@ -1,3 +1,30 @@
+# 🤖 Telegram Bot
 python-telegram-bot==20.7
+
+# 🗄️ Database
 pymongo==4.5.0
+dnspython==2.4.2
+
+# 🌐 Web Requests
 requests==2.31.0
+urllib3==2.0.7
+
+# 🔧 Utilities
+python-dotenv==1.0.0
+python-dateutil==2.8.2
+
+# 📊 Data Handling
+pytz==2023.3
+
+# 🛡️ Security
+cryptography==41.0.4
+
+# 📝 Logging
+colorlog==6.7.0
+
+# 🔄 Async
+aiohttp==3.8.5
+
+# 🧪 Testing (Optional)
+pytest==7.4.2
+pytest-asyncio==0.21.1
