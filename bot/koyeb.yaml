@@ -1,0 +1,25 @@
+name: dramawallah-bot
+services:
+  - name: app
+    image: koyeb/dramawallah-bot
+    ports:
+      - port: 8000
+        protocol: HTTP
+    routes:
+      - path: /
+    env:
+      - name: BOT_TOKEN
+        secret: true
+      - name: MONGO_URI  
+        secret: true
+      - name: ADMIN_IDS
+        secret: true
+    regions:
+      - fra
+    instance:
+      type: nano
+    health_checks:
+      http:
+        path: /health
+        port: 8000
+        scheme: HTTP
