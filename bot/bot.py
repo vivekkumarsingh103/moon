@@ -891,24 +891,22 @@ signal.signal(signal.SIGINT, handle_shutdown)
 signal.signal(signal.SIGTERM, handle_shutdown)
 
 def main():
-    """Main function with error handling for Render"""
-    try:
-        # Validate environment variables
-        required_vars = ['BOT_TOKEN', 'MONGO_URI', 'ADMIN_IDS']
-        missing_vars = [var for var in required_vars if not os.getenv(var)]
-        
-        if missing_vars:
-            print(f"❌ Missing environment variables: {', '.join(missing_vars)}")
-            print("💡 Please set them in Render dashboard → Environment")
-            sys.exit(1)
-        
-        print("✅ Environment variables validated")
-        print("🔧 Initializing Dramawallah Bot...")
-        
-        # Create and run bot
-        bot = DramawallahBot()
-        bot.run()
-        
+    """Main function with Render compatibility"""
+    # Validate environment variables
+    required_vars = ['BOT_TOKEN', 'MONGO_URI', 'ADMIN_IDS']
+    missing_vars = [var for var in required_vars if not os.getenv(var)]
+    
+    if missing_vars:
+        print(f"❌ Missing environment variables: {', '.join(missing_vars)}")
+        print("💡 Please set them in Render dashboard → Environment")
+        return  # DO NOT EXIT WITH sys.exit()
+
+    print("✅ Environment variables validated")
+    print("🔧 Initializing Dramawallah Bot...")
+
+    bot = DramawallahBot()
+    bot.run()
+
     except Exception as e:
         print(f"💥 Bot crashed: {e}")
         logger.error(f"Bot crashed: {e}")
