@@ -679,7 +679,7 @@ class DramawallahBot:
             return
         
         keyboard = [
-            [InlineKeyboardButton("🔍 Search on Website", url="https://dramawallah.netlify.app/")]
+            [InlineKeyboardButton("🔍 Search on Website", url="https://dramawallah.vercel.app/")]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
         
@@ -795,13 +795,13 @@ class DramawallahBot:
             keyboard = []
             for result in results[:3]:  # Max 3 results
                 if result['category'] == 'ongoing':
-                    url = "https://dramawallah.netlify.app/#ongoing"
+                    url = "https://dramawallah.vercel.app/#ongoing"
                 elif result['category'] == 'blog':
-                    url = "https://dramawallah.netlify.app/#blog"
+                    url = "https://dramawallah.vercel.app/#blog"
                 elif result['category'] == 'home':
-                    url = "https://dramawallah.netlify.app/#home"
+                    url = "https://dramawallah.vercel.app/#home"
                 else:
-                    url = "https://dramawallah.netlify.app/#all-posts"
+                    url = "https://dramawallah.vercel.app/#all-posts"
                 
                 keyboard.append([InlineKeyboardButton(
                     f"🎬 {result['title']}",
