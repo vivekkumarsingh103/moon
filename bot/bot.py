@@ -3,31 +3,13 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 from datetime import datetime
 import os
 import logging
-import re
-from config import BOT_TOKEN, ADMIN_IDS, SEARCH_TRIGGERS
+import signal
+import sys
+import asyncio
+from config import BOT_TOKEN, ADMIN_IDS, SEARCH_TRIGGERS, WEBSITE_URL
 from database import Database
 from file_handler import FileHandler
 from website_manager import WebsiteManager
-import threading
-from health_check import start_health_server
-
-class DramawallahBot:
-    def __init__(self):
-        # ... existing code ...
-        
-        # Start health check server in background
-        self.start_health_server()
-    
-    def start_health_server(self):
-        """Start health check server in background thread"""
-        try:
-            health_thread = threading.Thread(target=start_health_server, daemon=True)
-            health_thread.start()
-            logger.info("✅ Health check server started")
-        except Exception as e:
-            logger.warning(f"❌ Health check server failed: {e}")
-
-# ... rest of your existing bot.py code ...
 
 # Setup logging
 logging.basicConfig(
@@ -112,6 +94,7 @@ class DramawallahBot:
         self.application.add_handler(CommandHandler("search", self.search))
         self.application.add_handler(CommandHandler("info", self.info))
         self.application.add_handler(CommandHandler("start", self.start))
+        self.application.add_handler(CommandHandler("help", self.help))
         
         # Message handler for group search and user registration
         self.application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_text_message))
@@ -131,7 +114,7 @@ class DramawallahBot:
         }
         self.db.add_user(user_data)
         
-        await update.message.reply_text(
+        welcome_text = (
             f"👋 Welcome {user.first_name} to **Dramawallah Bot**! 🎬\n\n"
             "**Available Commands:**\n"
             "• /addpost - Add new drama post with files\n"
@@ -139,9 +122,29 @@ class DramawallahBot:
             "• /blog - Create blog posts\n"
             "• /search - Search for content\n"
             "• /info - Get bot statistics\n"
-            "• /broadcast - Broadcast message (Admins)\n\n"
-            "Use /help for more information."
+            "• /broadcast - Broadcast message (Admins)\n"
+            "• /help - Show this help message\n\n"
+            f"**🌐 Website:** {WEBSITE_URL}"
         )
+        
+        await update.message.reply_text(welcome_text)
+    
+    async def help(self, update: Update, context: CallbackContext):
+        """Handle /help command"""
+        help_text = (
+            "🤖 **Dramawallah Bot Help**\n\n"
+            "**Admin Commands:**\n"
+            "• /addpost - Add new drama with files\n"
+            "• /ongoing - Manage ongoing dramas\n"
+            "• /blog - Create blog posts\n"
+            "• /broadcast - Send message to all users\n"
+            "• /info - View bot statistics\n\n"
+            "**User Commands:**\n"
+            "• /search - Search for dramas\n"
+            "• /start - Welcome message\n\n"
+            f"**Visit our website:** {WEBSITE_URL}"
+        )
+        await update.message.reply_text(help_text)
     
     async def cancel(self, update: Update, context: CallbackContext):
         """Cancel any conversation"""
@@ -195,6 +198,10 @@ class DramawallahBot:
     async def start_addpost(self, update: Update, context: CallbackContext):
         """Start /addpost conversation"""
         try:
+            if not self.is_admin(update.effective_user.id):
+                await update.message.reply_text("❌ This command is for admins only.")
+                return ConversationHandler.END
+                
             await update.message.reply_text(
                 "📺 **Add New Kdrama Post**\n\n"
                 "Send me the private channel link where files should be posted:"
@@ -377,6 +384,10 @@ class DramawallahBot:
     # ==================== /ongoing FUNCTION ====================
     async def start_ongoing(self, update: Update, context: CallbackContext):
         """Start /ongoing command"""
+        if not self.is_admin(update.effective_user.id):
+            await update.message.reply_text("❌ This command is for admins only.")
+            return ConversationHandler.END
+            
         keyboard = [
             [InlineKeyboardButton("➕ Add New Ongoing", callback_data="add_ongoing")],
             [InlineKeyboardButton("✏️ Edit Existing", callback_data="edit_ongoing")]
@@ -527,6 +538,10 @@ class DramawallahBot:
     # ==================== /blog FUNCTION ====================
     async def start_blog(self, update: Update, context: CallbackContext):
         """Start blog creation"""
+        if not self.is_admin(update.effective_user.id):
+            await update.message.reply_text("❌ This command is for admins only.")
+            return ConversationHandler.END
+            
         await update.message.reply_text("📝 **Create New Blog Post**\n\nSend the blog image:")
         context.user_data['blog_text'] = ""  # Initialize blog text
         return BLOG_IMAGE
@@ -679,13 +694,13 @@ class DramawallahBot:
             return
         
         keyboard = [
-            [InlineKeyboardButton("🔍 Search on Website", url="https://dramawallah.vercel.app/")]
+            [InlineKeyboardButton("🔍 Search on Website", url=f"{WEBSITE_URL}")]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
         
         await update.message.reply_text(
             "🔍 **Search Dramas**\n\n"
-            "Click the button below to search on our website:",
+            f"Click the button below to search on our website:",
             reply_markup=reply_markup
         )
     
@@ -718,6 +733,7 @@ class DramawallahBot:
                 f"• Total Files: {stats['total_files']}\n"
                 f"• Blog Posts: {stats['total_blogs']}\n"
                 f"• Registered Users: {stats['total_users']}\n\n"
+                f"**🌐 Website:** {WEBSITE_URL}\n\n"
             )
             
             if ongoing_posts:
@@ -795,13 +811,13 @@ class DramawallahBot:
             keyboard = []
             for result in results[:3]:  # Max 3 results
                 if result['category'] == 'ongoing':
-                    url = "https://dramawallah.vercel.app/#ongoing"
+                    url = f"{WEBSITE_URL}/#ongoing"
                 elif result['category'] == 'blog':
-                    url = "https://dramawallah.vercel.app/#blog"
+                    url = f"{WEBSITE_URL}/#blog"
                 elif result['category'] == 'home':
-                    url = "https://dramawallah.vercel.app/#home"
+                    url = f"{WEBSITE_URL}/#home"
                 else:
-                    url = "https://dramawallah.vercel.app/#all-posts"
+                    url = f"{WEBSITE_URL}/#bot-posts"
                 
                 keyboard.append([InlineKeyboardButton(
                     f"🎬 {result['title']}",
@@ -841,18 +857,52 @@ class DramawallahBot:
         except Exception as e:
             logger.error(f"Error posting to channel {channel_link}: {e}")
             raise
+    
+    def run(self):
+        """Start the bot with Render compatibility"""
+        logger.info("🚀 Starting Dramawallah Bot on Render...")
+        print("🤖 Bot is starting...")
+        print(f"🌐 Website: {WEBSITE_URL}")
+        print("✅ Bot is ready and listening for messages...")
+        
+        # Start polling
+        self.application.run_polling(
+            drop_pending_updates=True,
+            allowed_updates=Update.ALL_TYPES
+        )
+
+def handle_shutdown(signum, frame):
+    """Handle shutdown signals gracefully"""
+    print("🛑 Received shutdown signal. Bot is stopping...")
+    sys.exit(0)
+
+# Register signal handlers
+signal.signal(signal.SIGINT, handle_shutdown)
+signal.signal(signal.SIGTERM, handle_shutdown)
 
 def main():
-    """Start the bot"""
-    bot = DramawallahBot()
-    logger.info("🤖 Dramawallah Bot is starting...")
-    
+    """Main function with error handling for Render"""
     try:
-        bot.application.run_polling()
+        # Validate environment variables
+        required_vars = ['BOT_TOKEN', 'MONGO_URI', 'ADMIN_IDS']
+        missing_vars = [var for var in required_vars if not os.getenv(var)]
+        
+        if missing_vars:
+            print(f"❌ Missing environment variables: {', '.join(missing_vars)}")
+            print("💡 Please set them in Render dashboard → Environment")
+            sys.exit(1)
+        
+        print("✅ Environment variables validated")
+        print("🔧 Initializing Dramawallah Bot...")
+        
+        # Create and run bot
+        bot = DramawallahBot()
+        bot.run()
+        
     except Exception as e:
+        print(f"💥 Bot crashed: {e}")
         logger.error(f"Bot crashed: {e}")
-    finally:
-        logger.info("Bot stopped")
+        sys.exit(1)
 
 if __name__ == '__main__':
     main()
