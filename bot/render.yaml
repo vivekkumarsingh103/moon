@@ -3,6 +3,7 @@ services:
     name: dramawallah-bot
     env: python
     plan: free
+    region: oregon
     buildCommand: pip install -r requirements.txt
     startCommand: python bot.py
     envVars:
