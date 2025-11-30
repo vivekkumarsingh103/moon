@@ -10,6 +10,16 @@ from config import BOT_TOKEN, ADMIN_IDS, SEARCH_TRIGGERS, WEBSITE_URL
 from database import Database
 from file_handler import FileHandler
 from website_manager import WebsiteManager
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    MessageHandler,
+    CallbackQueryHandler,
+    ConversationHandler,
+    ContextTypes,
+    filters
+)
+
 
 # Setup logging
 logging.basicConfig(
